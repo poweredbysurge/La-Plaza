@@ -263,6 +263,19 @@
       color: rgba(26,20,16,0.65);
     }
 
+    .soon-tag {
+      display: inline-block;
+      font-size: 8px; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 2px 7px;
+      border-radius: 10px;
+      vertical-align: middle;
+      margin-left: 7px;
+      line-height: 1.6;
+    }
+
     /* ── DINING CALLOUT ── */
     .dining-callout {
       background: var(--dark);
@@ -392,6 +405,22 @@
     }
     .footer-social a:hover { color: rgba(240,235,226,0.8); }
 
+    /* Managed-by logo badge */
+    .footer-mgmt {
+      margin-top: 28px;
+    }
+    .footer-mgmt-label {
+      font-size: 9px; font-weight: 400; letter-spacing: 0.32em;
+      text-transform: uppercase; color: rgba(240,235,226,0.4);
+      display: block; margin-bottom: 8px;
+    }
+    .footer-mgmt-badge {
+      display: inline-flex; align-items: center;
+      background: rgba(255,255,255,0.92);
+      padding: 7px 14px; border-radius: 6px;
+    }
+    .footer-mgmt-badge img { height: 26px; width: auto; display: block; }
+
   </style>
 </head>
 <body>
@@ -431,7 +460,8 @@
       <button class="filter-btn" data-filter="play" onclick="filterTenants('play')">Wellness &amp; Beauty</button>
       <button class="filter-btn" data-filter="shop" onclick="filterTenants('shop')">Shop</button>
       <button class="filter-btn" data-filter="dine" onclick="filterTenants('dine')">Dine</button>
-      <span class="filter-count" id="filterCount">15 locations</span>
+      <button class="filter-btn" data-filter="services" onclick="filterTenants('services')">Services</button>
+      <span class="filter-count" id="filterCount">14 locations</span>
     </div>
   </div>
 
@@ -444,7 +474,7 @@
         <!-- Thread + Seed -->
         <div class="tenant-card" data-cat="shop">
           <div class="tenant-card__img">
-            <img src="https://cdn.b12.io/client_media/Rfc3NbPx/3a51735c-b67a-11ef-a620-0242ac110002-jpeg-hero_image.jpeg" alt="Thread + Seed" />
+            <img src="images/Logos%20and%20TT%20Photos/thread%20and%20seed%20IMG_2230.jpeg" alt="Thread + Seed" />
             <span class="tenant-card__cat">Shop</span>
           </div>
           <div class="tenant-card__body">
@@ -454,27 +484,14 @@
           </div>
         </div>
 
-        <!-- The Smart Fit Method -->
-        <div class="tenant-card" data-cat="play">
-          <div class="tenant-card__img">
-            <img src="https://cdn.b12.io/client_media/Rfc3NbPx/4510370c-7c92-11ed-8355-0242ac110003-jpeg-hero_image.jpeg" alt="The Smart Fit Method" />
-            <span class="tenant-card__cat">Wellness</span>
-          </div>
-          <div class="tenant-card__body">
-            <div class="tenant-card__name">The Smart Fit Method</div>
-            <div class="tenant-card__suite">Suite 102</div>
-            <span class="tenant-card__nolink">In-studio only</span>
-          </div>
-        </div>
-
-        <!-- Elixir Espresso Bar -->
+        <!-- Elixir Espresso & Wine Bar -->
         <div class="tenant-card" data-cat="dine">
           <div class="tenant-card__img">
-            <img src="https://cdn.b12.io/client_media/Rfc3NbPx/688ec0dc-bd66-11eb-99f1-0242ac110002-jpg-hero_image.jpeg" alt="Elixir Espresso Bar" />
+            <img src="https://cdn.b12.io/client_media/Rfc3NbPx/688ec0dc-bd66-11eb-99f1-0242ac110002-jpg-hero_image.jpeg" alt="Elixir Espresso &amp; Wine Bar" />
             <span class="tenant-card__cat">Dine</span>
           </div>
           <div class="tenant-card__body">
-            <div class="tenant-card__name">Elixir Espresso Bar</div>
+            <div class="tenant-card__name">Elixir Espresso &amp; Wine Bar</div>
             <div class="tenant-card__suite">Suite 105</div>
             <a href="https://www.elixirespressobar.com/" target="_blank" rel="noopener" class="tenant-card__link">
               Visit Website
@@ -499,38 +516,6 @@
           </div>
         </div>
 
-        <!-- Ceragem -->
-        <div class="tenant-card" data-cat="play">
-          <div class="tenant-card__img">
-            <img src="https://cdn.b12.io/client_media/Rfc3NbPx/29923bb6-d2ad-11ee-ba55-0242ac110002-jpg-hero_image.jpeg" alt="Ceragem" />
-            <span class="tenant-card__cat">Wellness</span>
-          </div>
-          <div class="tenant-card__body">
-            <div class="tenant-card__name">Ceragem</div>
-            <div class="tenant-card__suite">Suite 107</div>
-            <a href="https://ceragemus.com/" target="_blank" rel="noopener" class="tenant-card__link">
-              Visit Website
-              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Browboss -->
-        <div class="tenant-card" data-cat="play">
-          <div class="tenant-card__img">
-            <img src="https://cdn.b12.io/client_media/Rfc3NbPx/7cb1ab74-bd66-11eb-bc3a-0242ac110002-jpg-regular_image.jpeg" alt="Browboss" />
-            <span class="tenant-card__cat">Beauty</span>
-          </div>
-          <div class="tenant-card__body">
-            <div class="tenant-card__name">Browboss</div>
-            <div class="tenant-card__suite">Suite 109</div>
-            <a href="https://browboss.com/" target="_blank" rel="noopener" class="tenant-card__link">
-              Visit Website
-              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
-        </div>
-
         <!-- ONE|10 SALON -->
         <div class="tenant-card" data-cat="play">
           <div class="tenant-card__img">
@@ -541,6 +526,35 @@
             <div class="tenant-card__name">ONE|10 SALON</div>
             <div class="tenant-card__suite">Suite 110</div>
             <a href="https://www.one10salon.com/" target="_blank" rel="noopener" class="tenant-card__link">
+              Visit Website
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Hummingbird Luxury Jewelry -->
+        <div class="tenant-card" data-cat="shop">
+          <div class="tenant-card__img">
+            <img src="https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&w=600&q=80" alt="Hummingbird Luxury Jewelry" />
+            <span class="tenant-card__cat">Shop</span>
+          </div>
+          <div class="tenant-card__body">
+            <div class="tenant-card__name">Hummingbird Luxury Jewelry</div>
+            <div class="tenant-card__suite">Suite 112</div>
+            <span class="tenant-card__nolink">In-store only</span>
+          </div>
+        </div>
+
+        <!-- The Dickinson & Clark Team -->
+        <div class="tenant-card" data-cat="services">
+          <div class="tenant-card__img">
+            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=600&q=80" alt="The Dickinson &amp; Clark Team" />
+            <span class="tenant-card__cat">Services</span>
+          </div>
+          <div class="tenant-card__body">
+            <div class="tenant-card__name">The Dickinson &amp; Clark Team</div>
+            <div class="tenant-card__suite">Suite 201 · Compass</div>
+            <a href="https://www.compass.com/" target="_blank" rel="noopener" class="tenant-card__link">
               Visit Website
               <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
@@ -563,14 +577,14 @@
           </div>
         </div>
 
-        <!-- Teuscher Chocolates -->
+        <!-- Teuscher San Diego -->
         <div class="tenant-card" data-cat="shop">
           <div class="tenant-card__img">
-            <img src="https://cdn.b12.io/client_media/Rfc3NbPx/a40e9128-bd66-11eb-9188-0242ac110003-jpg-regular_image.jpeg" alt="Teuscher Chocolates" />
+            <img src="https://cdn.b12.io/client_media/Rfc3NbPx/a40e9128-bd66-11eb-9188-0242ac110003-jpg-regular_image.jpeg" alt="Teuscher San Diego" />
             <span class="tenant-card__cat">Shop · Dine</span>
           </div>
           <div class="tenant-card__body">
-            <div class="tenant-card__name">Teuscher Chocolates</div>
+            <div class="tenant-card__name">Teuscher San Diego</div>
             <div class="tenant-card__suite">Suite 204</div>
             <a href="https://www.teuschersandiego.com/" target="_blank" rel="noopener" class="tenant-card__link">
               Visit Website
@@ -579,8 +593,24 @@
           </div>
         </div>
 
-        <!-- Compass -->
-        <div class="tenant-card" data-cat="shop">
+        <!-- Compass 205 & 207 -->
+        <div class="tenant-card" data-cat="services">
+          <div class="tenant-card__img">
+            <img src="https://cdn.b12.io/client_media/Rfc3NbPx/077a158e-bd67-11eb-9188-0242ac110003-jpg-hero_image.jpeg" alt="Compass Real Estate" />
+            <span class="tenant-card__cat">Services</span>
+          </div>
+          <div class="tenant-card__body">
+            <div class="tenant-card__name">Compass</div>
+            <div class="tenant-card__suite">Suites 205 &amp; 207</div>
+            <a href="https://www.compass.com/" target="_blank" rel="noopener" class="tenant-card__link">
+              Visit Website
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Compass 208 & 210 -->
+        <div class="tenant-card" data-cat="services">
           <div class="tenant-card__img">
             <img src="https://cdn.b12.io/client_media/Rfc3NbPx/077a158e-bd67-11eb-9188-0242ac110003-jpg-hero_image.jpeg" alt="Compass Real Estate" />
             <span class="tenant-card__cat">Services</span>
@@ -595,10 +625,39 @@
           </div>
         </div>
 
+        <!-- Catania -->
+        <div class="tenant-card" data-cat="dine">
+          <div class="tenant-card__img">
+            <img src="images/Logos%20and%20TT%20Photos/catania%20_K9A5725-2.jpg" alt="Catania" />
+            <span class="tenant-card__cat">Dine</span>
+          </div>
+          <div class="tenant-card__body">
+            <div class="tenant-card__name">Catania</div>
+            <div class="tenant-card__suite">Suite 301</div>
+            <a href="https://www.cataniasd.com/" target="_blank" rel="noopener" class="tenant-card__link">
+              Visit Website
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Cullen Jewellery -->
+        <div class="tenant-card" data-cat="shop">
+          <div class="tenant-card__img">
+            <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600&q=80" alt="Cullen Jewellery" />
+            <span class="tenant-card__cat">Shop</span>
+          </div>
+          <div class="tenant-card__body">
+            <div class="tenant-card__name">Cullen Jewellery</div>
+            <div class="tenant-card__suite">Suite 303 <span class="soon-tag">Opening Soon</span></div>
+            <span class="tenant-card__nolink">Coming soon</span>
+          </div>
+        </div>
+
         <!-- BlushTan -->
         <div class="tenant-card" data-cat="play">
           <div class="tenant-card__img">
-            <img src="https://cdn.b12.io/client_media/Rfc3NbPx/466fc706-bd68-11eb-9d73-0242ac110002-jpg-hero_image.jpeg" alt="BlushTan" />
+            <img src="images/Logos%20and%20TT%20Photos/blushtan%20photo%20feature%202Y4A0100%20(1).jpg" alt="BlushTan" />
             <span class="tenant-card__cat">Beauty</span>
           </div>
           <div class="tenant-card__body">
@@ -619,56 +678,8 @@
           </div>
           <div class="tenant-card__body">
             <div class="tenant-card__name">Lucien</div>
-            <div class="tenant-card__suite">Suite 308</div>
+            <div class="tenant-card__suite">Suite 307</div>
             <a href="https://luciensd.com/" target="_blank" rel="noopener" class="tenant-card__link">
-              Visit Website
-              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Catania -->
-        <div class="tenant-card" data-cat="dine">
-          <div class="tenant-card__img">
-            <img src="https://cdn.b12.io/client_media/Rfc3NbPx/569a2614-bd66-11eb-8ca4-0242ac110002-jpg-hero_image.jpeg" alt="Catania" />
-            <span class="tenant-card__cat">Dine</span>
-          </div>
-          <div class="tenant-card__body">
-            <div class="tenant-card__name">Catania</div>
-            <div class="tenant-card__suite">Suite 301</div>
-            <a href="https://www.cataniasd.com/" target="_blank" rel="noopener" class="tenant-card__link">
-              Visit Website
-              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Brilliant Earth -->
-        <div class="tenant-card" data-cat="shop">
-          <div class="tenant-card__img">
-            <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600&q=80" alt="Brilliant Earth" />
-            <span class="tenant-card__cat">Shop</span>
-          </div>
-          <div class="tenant-card__body">
-            <div class="tenant-card__name">Brilliant Earth</div>
-            <div class="tenant-card__suite">Fine Jewellery</div>
-            <a href="https://www.brilliantearth.com/san-diego-jewelers/" target="_blank" rel="noopener" class="tenant-card__link">
-              Visit Website
-              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- The Hydration Room -->
-        <div class="tenant-card" data-cat="play">
-          <div class="tenant-card__img">
-            <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=600&q=80" alt="The Hydration Room" />
-            <span class="tenant-card__cat">Wellness</span>
-          </div>
-          <div class="tenant-card__body">
-            <div class="tenant-card__name">The Hydration Room</div>
-            <div class="tenant-card__suite">Wellness</div>
-            <a href="https://hydrationroom.com/" target="_blank" rel="noopener" class="tenant-card__link">
               Visit Website
               <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
@@ -712,7 +723,7 @@
         </div>
 
         <div class="dining-card">
-          <img src="https://cdn.b12.io/client_media/Rfc3NbPx/569a2614-bd66-11eb-8ca4-0242ac110002-jpg-hero_image.jpeg" alt="Catania" />
+          <img src="images/Logos%20and%20TT%20Photos/catania%20_T9A0183.jpg" alt="Catania" />
           <div class="dining-card__overlay"></div>
           <div class="dining-card__body">
             <div class="dining-card__name">Catania</div>
@@ -729,7 +740,7 @@
           <div class="dining-card__overlay"></div>
           <div class="dining-card__body">
             <div class="dining-card__name">Lucien</div>
-            <div class="dining-card__suite">Suite 308 · Restaurant</div>
+            <div class="dining-card__suite">Suite 307 · Restaurant</div>
             <a href="https://luciensd.com/" target="_blank" rel="noopener" class="dining-card__link">
               Visit
               <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -752,6 +763,12 @@
           7863–7877 Girard Avenue<br>La Jolla, CA 92037<br><br>
           <a href="tel:8588763945">(858) 876-3945</a><br>
           <a href="mailto:laplazapm@regentproperties.com">laplazapm@regentproperties.com</a>
+        </div>
+        <div class="footer-mgmt">
+          <span class="footer-mgmt-label">Managed by</span>
+          <div class="footer-mgmt-badge">
+            <img src="images/RRES%202024%20Logo.png" alt="Reef Real Estate Services" />
+          </div>
         </div>
       </div>
       <div>
