@@ -405,21 +405,138 @@
     }
     .footer-social a:hover { color: rgba(240,235,226,0.8); }
 
+    /* ── TENANT MODAL ── */
+    .tm-overlay {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(10,8,6,0.80);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 40px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.32s ease;
+    }
+    .tm-overlay.is-open { opacity: 1; pointer-events: all; }
+    .tm-dialog {
+      display: flex;
+      width: 100%; max-width: 980px;
+      height: clamp(480px, 72vh, 660px);
+      background: var(--cream);
+      position: relative;
+      overflow: hidden;
+      transform: translateY(20px) scale(0.985);
+      transition: transform 0.38s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .tm-overlay.is-open .tm-dialog { transform: translateY(0) scale(1); }
+
+    .tm-gallery {
+      position: relative;
+      width: 50%; flex-shrink: 0;
+      background: var(--dark);
+      overflow: hidden;
+    }
+    .tm-gallery img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transition: opacity 0.28s ease;
+    }
+    .tm-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(10,8,6,0.52);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      border: none; cursor: pointer;
+      color: #fff; font-size: 26px; line-height: 1;
+      width: 46px; height: 46px;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.22s; z-index: 2;
+    }
+    .tm-arrow:hover { background: rgba(10,8,6,0.78); }
+    .tm-prev { left: 16px; }
+    .tm-next { right: 16px; }
+    .tm-arrow.hidden { display: none; }
+    .tm-dots {
+      position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 8px; z-index: 2;
+    }
+    .tm-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(255,255,255,0.38); cursor: pointer;
+      transition: background 0.22s, transform 0.22s;
+    }
+    .tm-dot.active { background: rgba(255,255,255,0.92); transform: scale(1.3); }
+
+    .tm-info {
+      flex: 1; padding: 52px 48px 44px;
+      display: flex; flex-direction: column;
+      overflow-y: auto; position: relative;
+    }
+    .tm-close {
+      position: absolute; top: 22px; right: 22px;
+      background: none; border: none;
+      font-size: 24px; line-height: 1;
+      color: rgba(26,20,16,0.38);
+      cursor: pointer; padding: 4px;
+      transition: color 0.22s; z-index: 10;
+    }
+    .tm-close:hover { color: var(--text); }
+    .tm-cat-badge {
+      display: inline-block;
+      font-size: 9.5px; font-weight: 500;
+      letter-spacing: 0.26em; text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(196,160,82,0.45);
+      padding: 5px 14px; border-radius: 20px;
+      margin-bottom: 24px; align-self: flex-start;
+    }
+    .tm-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(22px, 2.8vw, 34px);
+      font-weight: 400; color: var(--text);
+      line-height: 1.15; margin-bottom: 10px;
+    }
+    .tm-suite {
+      display: block;
+      font-size: 10.5px; font-weight: 400;
+      letter-spacing: 0.32em; text-transform: uppercase;
+      color: rgba(26,20,16,0.52); margin-bottom: 28px;
+    }
+    .tm-desc {
+      font-size: 14px; font-weight: 300; line-height: 1.85;
+      color: rgba(26,20,16,0.76); flex: 1; margin-bottom: 36px;
+    }
+    .tm-website {
+      display: inline-flex; align-items: center; gap: 9px;
+      font-size: 10.5px; font-weight: 500;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      text-decoration: none; color: var(--cream);
+      background: var(--text); padding: 14px 26px;
+      align-self: flex-start; transition: background 0.26s;
+    }
+    .tm-website:hover { background: var(--gold); }
+    .tm-website svg { transition: transform 0.25s; }
+    .tm-website:hover svg { transform: translateX(3px); }
+    @media (max-width: 700px) {
+      .tm-overlay { padding: 0; align-items: flex-end; }
+      .tm-dialog { flex-direction: column; height: 92vh; max-width: 100%; border-radius: 0; }
+      .tm-gallery { width: 100%; height: 48%; flex-shrink: 0; }
+      .tm-info { padding: 32px 28px 28px; }
+    }
+
     /* Managed-by logo badge */
     .footer-mgmt {
-      margin-top: 28px;
+      margin-top: 36px;
     }
     .footer-mgmt-label {
       font-size: 9px; font-weight: 400; letter-spacing: 0.32em;
       text-transform: uppercase; color: rgba(240,235,226,0.4);
-      display: block; margin-bottom: 8px;
+      display: block; margin-bottom: 14px;
     }
     .footer-mgmt-badge {
       display: inline-flex; align-items: center;
-      background: rgba(255,255,255,0.92);
-      padding: 7px 14px; border-radius: 6px;
+      background: #fff;
+      padding: 14px 22px;
     }
-    .footer-mgmt-badge img { height: 26px; width: auto; display: block; }
+    .footer-mgmt-badge img { height: 52px; width: auto; display: block; }
 
   </style>
 </head>
@@ -472,7 +589,7 @@
       <div class="tenant-grid" id="tenantGrid">
 
         <!-- Thread + Seed -->
-        <div class="tenant-card" data-cat="shop">
+        <div class="tenant-card" data-cat="shop" onclick="openTenant(event, this)" data-name="Thread + Seed" data-suite="Suite 101" data-cat-label="Shop" data-desc="A curated boutique offering thoughtfully crafted clothing and accessories rooted in sustainable style. Thread + Seed brings together artisan-made pieces and conscious fashion for the modern La Jolla lifestyle." data-images="images/Logos%20and%20TT%20Photos/thread%20and%20seed%20IMG_2230.jpeg">
           <div class="tenant-card__img">
             <img src="images/Logos%20and%20TT%20Photos/thread%20and%20seed%20IMG_2230.jpeg" alt="Thread + Seed" />
             <span class="tenant-card__cat">Shop</span>
@@ -485,7 +602,7 @@
         </div>
 
         <!-- Elixir Espresso & Wine Bar -->
-        <div class="tenant-card" data-cat="dine">
+        <div class="tenant-card" data-cat="dine" onclick="openTenant(event, this)" data-name="Elixir Espresso &amp; Wine Bar" data-suite="Suite 105" data-cat-label="Dine" data-desc="La Jolla's beloved neighborhood café and wine bar. From expertly pulled espresso at dawn to carefully curated wines by evening, Elixir is your all-day social anchor at La Plaza." data-images="https://cdn.b12.io/client_media/Rfc3NbPx/688ec0dc-bd66-11eb-99f1-0242ac110002-jpg-hero_image.jpeg" data-website="https://www.elixirespressobar.com/">
           <div class="tenant-card__img">
             <img src="https://cdn.b12.io/client_media/Rfc3NbPx/688ec0dc-bd66-11eb-99f1-0242ac110002-jpg-hero_image.jpeg" alt="Elixir Espresso &amp; Wine Bar" />
             <span class="tenant-card__cat">Dine</span>
@@ -501,7 +618,7 @@
         </div>
 
         <!-- Bouluci Boutique -->
-        <div class="tenant-card" data-cat="shop">
+        <div class="tenant-card" data-cat="shop" onclick="openTenant(event, this)" data-name="Bouluci Boutique" data-suite="Suite 106" data-cat-label="Shop" data-desc="A luxury women's boutique offering an exquisite selection of designer clothing, accessories, and fine jewelry. Bouluci curates a distinctive collection for the discerning La Jolla shopper." data-images="https://cdn.b12.io/client_media/Rfc3NbPx/77b6927a-5d9f-11ee-b9ef-0242ac110002-png-hero_image.png" data-website="https://bouluciboutique.com/">
           <div class="tenant-card__img">
             <img src="https://cdn.b12.io/client_media/Rfc3NbPx/77b6927a-5d9f-11ee-b9ef-0242ac110002-png-hero_image.png" alt="Bouluci Boutique" />
             <span class="tenant-card__cat">Shop</span>
@@ -517,7 +634,7 @@
         </div>
 
         <!-- ONE|10 SALON -->
-        <div class="tenant-card" data-cat="play">
+        <div class="tenant-card" data-cat="play" onclick="openTenant(event, this)" data-name="ONE|10 SALON" data-suite="Suite 110" data-cat-label="Salon" data-desc="A premier full-service salon offering cutting-edge hair styling, color, and treatments. ONE|10 combines artistry with personalized care to deliver exceptional results in an elevated, welcoming space." data-images="https://cdn.b12.io/client_media/Rfc3NbPx/5acac3d0-bd69-11eb-bc3a-0242ac110002-jpg-hero_image.jpeg" data-website="https://www.one10salon.com/">
           <div class="tenant-card__img">
             <img src="https://cdn.b12.io/client_media/Rfc3NbPx/5acac3d0-bd69-11eb-bc3a-0242ac110002-jpg-hero_image.jpeg" alt="ONE|10 SALON" />
             <span class="tenant-card__cat">Salon</span>
@@ -533,7 +650,7 @@
         </div>
 
         <!-- Hummingbird Luxury Jewelry -->
-        <div class="tenant-card" data-cat="shop">
+        <div class="tenant-card" data-cat="shop" onclick="openTenant(event, this)" data-name="Hummingbird Luxury Jewelry" data-suite="Suite 112" data-cat-label="Shop" data-desc="An intimate fine jewelry studio specializing in handcrafted pieces and bespoke designs. Hummingbird brings together rare gemstones and master craftsmanship for jewelry that tells your story." data-images="https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&w=900&q=80">
           <div class="tenant-card__img">
             <img src="https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&w=600&q=80" alt="Hummingbird Luxury Jewelry" />
             <span class="tenant-card__cat">Shop</span>
@@ -546,7 +663,7 @@
         </div>
 
         <!-- The Dickinson & Clark Team -->
-        <div class="tenant-card" data-cat="services">
+        <div class="tenant-card" data-cat="services" onclick="openTenant(event, this)" data-name="The Dickinson &amp; Clark Team" data-suite="Suite 201 · Compass" data-cat-label="Services" data-desc="La Jolla's trusted real estate specialists. The Dickinson & Clark Team at Compass brings decades of local expertise to help clients buy, sell, and invest in San Diego's most coveted coastal properties." data-images="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=900&q=80" data-website="https://www.compass.com/">
           <div class="tenant-card__img">
             <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=600&q=80" alt="The Dickinson &amp; Clark Team" />
             <span class="tenant-card__cat">Services</span>
@@ -562,7 +679,7 @@
         </div>
 
         <!-- StretchLab -->
-        <div class="tenant-card" data-cat="play">
+        <div class="tenant-card" data-cat="play" onclick="openTenant(event, this)" data-name="StretchLab" data-suite="Suite 202" data-cat-label="Fitness" data-desc="Personalized assisted stretching sessions designed to improve flexibility, reduce pain, and enhance performance. StretchLab's expert Flexologists create customized programs for every body and fitness level." data-images="https://cdn.b12.io/client_media/Rfc3NbPx/c04171be-d2ab-11ee-bdc8-0242ac110002-png-hero_image.png" data-website="https://www.stretchlab.com/location/lajolla">
           <div class="tenant-card__img">
             <img src="https://cdn.b12.io/client_media/Rfc3NbPx/c04171be-d2ab-11ee-bdc8-0242ac110002-png-hero_image.png" alt="StretchLab" />
             <span class="tenant-card__cat">Fitness</span>
@@ -578,7 +695,7 @@
         </div>
 
         <!-- Teuscher San Diego -->
-        <div class="tenant-card" data-cat="shop">
+        <div class="tenant-card" data-cat="shop" onclick="openTenant(event, this)" data-name="Teuscher San Diego" data-suite="Suite 204" data-cat-label="Shop · Dine" data-desc="A legendary Swiss chocolatier crafting world-renowned confections using the finest ingredients imported directly from Switzerland. Experience handmade champagne truffles and seasonal creations at La Plaza." data-images="https://cdn.b12.io/client_media/Rfc3NbPx/a40e9128-bd66-11eb-9188-0242ac110003-jpg-regular_image.jpeg" data-website="https://www.teuschersandiego.com/">
           <div class="tenant-card__img">
             <img src="https://cdn.b12.io/client_media/Rfc3NbPx/a40e9128-bd66-11eb-9188-0242ac110003-jpg-regular_image.jpeg" alt="Teuscher San Diego" />
             <span class="tenant-card__cat">Shop · Dine</span>
@@ -594,7 +711,7 @@
         </div>
 
         <!-- Compass 205 & 207 -->
-        <div class="tenant-card" data-cat="services">
+        <div class="tenant-card" data-cat="services" onclick="openTenant(event, this)" data-name="Compass" data-suite="Suites 205 &amp; 207" data-cat-label="Services" data-desc="A technology-driven real estate brokerage dedicated to making the homebuying and selling process seamless. The Compass team at La Plaza serves buyers and sellers across La Jolla and greater San Diego." data-images="https://cdn.b12.io/client_media/Rfc3NbPx/077a158e-bd67-11eb-9188-0242ac110003-jpg-hero_image.jpeg" data-website="https://www.compass.com/">
           <div class="tenant-card__img">
             <img src="https://cdn.b12.io/client_media/Rfc3NbPx/077a158e-bd67-11eb-9188-0242ac110003-jpg-hero_image.jpeg" alt="Compass Real Estate" />
             <span class="tenant-card__cat">Services</span>
@@ -610,7 +727,7 @@
         </div>
 
         <!-- Compass 208 & 210 -->
-        <div class="tenant-card" data-cat="services">
+        <div class="tenant-card" data-cat="services" onclick="openTenant(event, this)" data-name="Compass" data-suite="Suites 208 &amp; 210" data-cat-label="Services" data-desc="A technology-driven real estate brokerage dedicated to making the homebuying and selling process seamless. The Compass team at La Plaza serves buyers and sellers across La Jolla and greater San Diego." data-images="https://cdn.b12.io/client_media/Rfc3NbPx/077a158e-bd67-11eb-9188-0242ac110003-jpg-hero_image.jpeg" data-website="https://www.compass.com/">
           <div class="tenant-card__img">
             <img src="https://cdn.b12.io/client_media/Rfc3NbPx/077a158e-bd67-11eb-9188-0242ac110003-jpg-hero_image.jpeg" alt="Compass Real Estate" />
             <span class="tenant-card__cat">Services</span>
@@ -626,7 +743,7 @@
         </div>
 
         <!-- Catania -->
-        <div class="tenant-card" data-cat="dine">
+        <div class="tenant-card" data-cat="dine" onclick="openTenant(event, this)" data-name="Catania" data-suite="Suite 301" data-cat-label="Dine" data-desc="An acclaimed Mediterranean restaurant set atop La Plaza with sweeping Pacific Ocean views. Catania celebrates the flavors of coastal Italy and Spain with fresh, locally sourced ingredients and an award-winning wine program." data-images="images/Logos%20and%20TT%20Photos/catania%20_K9A5725-2.jpg|images/Logos%20and%20TT%20Photos/catania%20_T9A0183.jpg|images/Logos%20and%20TT%20Photos/catania%20_K9A5739.jpg|images/Logos%20and%20TT%20Photos/catania%20_K9A5824.jpg|images/Logos%20and%20TT%20Photos/catania%20_K9A5940.jpg|images/Logos%20and%20TT%20Photos/catania%20_K9A6130.jpg|images/Logos%20and%20TT%20Photos/catania%20_K9A7263.jpg" data-website="https://www.cataniasd.com/">
           <div class="tenant-card__img">
             <img src="images/Logos%20and%20TT%20Photos/catania%20_K9A5725-2.jpg" alt="Catania" />
             <span class="tenant-card__cat">Dine</span>
@@ -642,7 +759,7 @@
         </div>
 
         <!-- Cullen Jewellery -->
-        <div class="tenant-card" data-cat="shop">
+        <div class="tenant-card" data-cat="shop" onclick="openTenant(event, this)" data-name="Cullen Jewellery" data-suite="Suite 303 · Opening Soon" data-cat-label="Shop" data-desc="Coming soon to La Plaza La Jolla — Cullen Jewellery brings an internationally celebrated collection of fine jewelry and engagement rings, known for timeless designs and impeccable craftsmanship." data-images="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=900&q=80">
           <div class="tenant-card__img">
             <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600&q=80" alt="Cullen Jewellery" />
             <span class="tenant-card__cat">Shop</span>
@@ -655,7 +772,7 @@
         </div>
 
         <!-- BlushTan -->
-        <div class="tenant-card" data-cat="play">
+        <div class="tenant-card" data-cat="play" onclick="openTenant(event, this)" data-name="BlushTan" data-suite="Suite 305" data-cat-label="Beauty" data-desc="San Diego's premier spray tanning studio offering custom airbrush tans using premium, skin-loving formulas. BlushTan delivers a natural, streak-free glow tailored to your individual skin tone and lifestyle." data-images="images/Logos%20and%20TT%20Photos/blushtan%20photo%20feature%202Y4A0100%20(1).jpg|images/Logos%20and%20TT%20Photos/blushtan%20048_Blush-7349%20(1).jpg" data-website="https://www.blushtan.com/lajolla">
           <div class="tenant-card__img">
             <img src="images/Logos%20and%20TT%20Photos/blushtan%20photo%20feature%202Y4A0100%20(1).jpg" alt="BlushTan" />
             <span class="tenant-card__cat">Beauty</span>
@@ -671,7 +788,7 @@
         </div>
 
         <!-- Lucien -->
-        <div class="tenant-card" data-cat="dine">
+        <div class="tenant-card" data-cat="dine" onclick="openTenant(event, this)" data-name="Lucien" data-suite="Suite 307" data-cat-label="Dine" data-desc="An elevated dining destination at La Plaza, Lucien offers a sophisticated menu inspired by French brasserie traditions with a California sensibility — ideal for weekend brunch, intimate dinners, and celebrations." data-images="https://cdn.b12.io/client_media/Rfc3NbPx/b65a3750-d2ae-11ee-a6de-0242ac110002-png-hero_image.png" data-website="https://luciensd.com/">
           <div class="tenant-card__img">
             <img src="https://cdn.b12.io/client_media/Rfc3NbPx/b65a3750-d2ae-11ee-a6de-0242ac110002-png-hero_image.png" alt="Lucien" />
             <span class="tenant-card__cat">Dine</span>
@@ -802,6 +919,26 @@
   </footer>
 
 
+  <!-- TENANT MODAL -->
+  <div id="tenantModal" class="tm-overlay" onclick="closeTenantModal(event)">
+    <div class="tm-dialog">
+      <div class="tm-gallery">
+        <img id="tmImg" src="" alt="" />
+        <button class="tm-arrow tm-prev hidden" onclick="shiftTenantImage(-1)">&#8249;</button>
+        <button class="tm-arrow tm-next hidden" onclick="shiftTenantImage(1)">&#8250;</button>
+        <div class="tm-dots" id="tmDots"></div>
+      </div>
+      <div class="tm-info">
+        <button class="tm-close" onclick="closeTenantModal()">&#215;</button>
+        <span class="tm-cat-badge" id="tmCat"></span>
+        <h2 class="tm-name" id="tmName"></h2>
+        <span class="tm-suite" id="tmSuite"></span>
+        <p class="tm-desc" id="tmDesc"></p>
+        <div id="tmActions"></div>
+      </div>
+    </div>
+  </div>
+
   <script>
     // Scroll-aware nav
     const nav = document.getElementById('siteNav');
@@ -833,6 +970,69 @@
       grid.offsetHeight; // force reflow
       grid.style.display = '';
     }
+
+    // ── Tenant Modal ──
+    let tmImages = [], tmIdx = 0;
+
+    function openTenant(e, card) {
+      if (e.target.closest('a')) return;
+
+      tmImages = (card.dataset.images || '').split('|').filter(Boolean);
+      tmIdx = 0;
+
+      document.getElementById('tmName').textContent  = card.dataset.name || '';
+      document.getElementById('tmSuite').textContent = card.dataset.suite || '';
+      document.getElementById('tmCat').textContent   = card.dataset.catLabel || '';
+      document.getElementById('tmDesc').textContent  = card.dataset.desc || '';
+
+      const website = card.dataset.website || '';
+      const actions = document.getElementById('tmActions');
+      actions.innerHTML = website
+        ? `<a href="${website}" target="_blank" rel="noopener" class="tm-website">Visit Website <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>`
+        : '';
+
+      renderTenantImage();
+      renderTenantDots();
+      document.getElementById('tenantModal').classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeTenantModal(e) {
+      if (e && e.target !== document.getElementById('tenantModal')) return;
+      document.getElementById('tenantModal').classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    function shiftTenantImage(dir) {
+      tmIdx = (tmIdx + dir + tmImages.length) % tmImages.length;
+      renderTenantImage();
+      renderTenantDots();
+    }
+
+    function renderTenantImage() {
+      const img = document.getElementById('tmImg');
+      const hasMult = tmImages.length > 1;
+      img.style.opacity = '0';
+      setTimeout(() => { img.src = tmImages[tmIdx] || ''; img.style.opacity = '1'; }, 140);
+      document.querySelector('.tm-prev').classList.toggle('hidden', !hasMult);
+      document.querySelector('.tm-next').classList.toggle('hidden', !hasMult);
+    }
+
+    function renderTenantDots() {
+      const dotsEl = document.getElementById('tmDots');
+      if (tmImages.length <= 1) { dotsEl.innerHTML = ''; return; }
+      dotsEl.innerHTML = tmImages.map((_, i) =>
+        `<span class="tm-dot${i === tmIdx ? ' active' : ''}" onclick="shiftTenantImage(${i - tmIdx})"></span>`
+      ).join('');
+    }
+
+    document.addEventListener('keydown', e => {
+      const modal = document.getElementById('tenantModal');
+      if (!modal.classList.contains('is-open')) return;
+      if (e.key === 'Escape')      { modal.classList.remove('is-open'); document.body.style.overflow = ''; }
+      if (e.key === 'ArrowLeft')   shiftTenantImage(-1);
+      if (e.key === 'ArrowRight')  shiftTenantImage(1);
+    });
   </script>
 
 </body>
