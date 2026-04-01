@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shops &amp; Restaurants — La Plaza La Jolla</title>
+  <meta name="description" content="Immerse yourself in San Diego culture with the beachside, open-air shopping experience at La Plaza La Jolla. It's the premier place to shop and dine." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --dark:  #0a0806;
+      --dark2: #111009;
+      --cream: #f0ebe2;
+      --gold:  #c4a052;
+      --text:  #1a1410;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    .site-nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 32px 64px;
+      transition: background 0.4s ease, backdrop-filter 0.4s ease, padding 0.3s ease;
+      background: transparent;
+    }
+    .site-nav.scrolled {
+      background: rgba(10,8,6,0.94);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      padding: 20px 64px;
+    }
+    .nav-logo { text-decoration: none; }
+    .nav-logo-main {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 20px; font-weight: 600;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: #fff; line-height: 1;
+      transition: opacity 0.3s;
+    }
+    .nav-logo:hover .nav-logo-main { opacity: 0.72; }
+    .nav-logo-sub {
+      display: block;
+      font-size: 11px; font-weight: 300;
+      letter-spacing: 0.44em; text-transform: uppercase;
+      color: rgba(255,255,255,0.75); margin-top: 5px;
+    }
+    .nav-links { list-style: none; display: flex; gap: 44px; }
+    .nav-links a {
+      position: relative;
+      font-size: 12px; font-weight: 400;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      text-decoration: none;
+      color: rgba(255,255,255,0.82);
+      padding-bottom: 4px;
+      transition: color 0.28s;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute;
+      bottom: 0; left: 0; width: 0%; height: 1px;
+      background: var(--gold);
+      transition: width 0.38s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a.is-active { color: #fff; }
+    .nav-links a.is-active::after { width: 100%; background: rgba(196,160,82,0.55); }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      position: relative;
+      height: 62vh; min-height: 460px;
+      display: flex; align-items: flex-end;
+      overflow: hidden;
+    }
+    .page-hero__bg {
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1920&q=85');
+      background-size: cover;
+      background-position: center 55%;
+      transform: scale(1.04);
+    }
+    .page-hero__overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(10,8,6,0.48) 0%, rgba(10,8,6,0.22) 40%, rgba(10,8,6,0.80) 100%);
+    }
+    .page-hero__content {
+      position: relative; z-index: 2;
+      padding: 0 80px 72px; width: 100%;
+    }
+    .page-hero__eyebrow {
+      display: block; font-size: 11px; font-weight: 400;
+      letter-spacing: 0.48em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 18px;
+    }
+    .page-hero__title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(44px, 6vw, 82px);
+      font-weight: 400; color: #fff;
+      line-height: 1.04; letter-spacing: -0.015em;
+      max-width: 700px;
+    }
+    .page-hero__sub {
+      font-size: 13px; font-weight: 300;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(255,255,255,0.78); margin-top: 22px;
+    }
+
+    /* ── FILTER BAR ── */
+    .filter-bar {
+      background: var(--cream);
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      border-bottom: 1px solid rgba(26,20,16,0.1);
+    }
+    .filter-inner {
+      max-width: 1280px; margin: 0 auto;
+      padding: 20px 80px;
+      display: flex; align-items: center;
+      gap: 10px;
+    }
+    .filter-btn {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px; font-weight: 500;
+      font-style: normal;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(26,20,16,0.65);
+      background: none; border: none;
+      padding: 0;
+      margin-right: 8px;
+      cursor: pointer;
+      position: relative;
+      transition: color 0.25s;
+    }
+    /* Pill style */
+    .filter-btn {
+      padding: 10px 20px;
+      border: 1px solid rgba(26,20,16,0.16);
+      border-radius: 32px;
+    }
+    .filter-btn:hover {
+      color: var(--text);
+      border-color: rgba(26,20,16,0.4);
+    }
+    .filter-btn.active {
+      color: var(--cream);
+      background: var(--text);
+      border-color: var(--text);
+    }
+
+    .filter-count {
+      margin-left: auto;
+      font-size: 11px; font-weight: 400;
+      letter-spacing: 0.28em; text-transform: uppercase;
+      color: rgba(26,20,16,0.65);
+      padding: 0;
+    }
+
+    /* ── TENANT GRID ── */
+    .tenant-section {
+      background: var(--cream);
+      padding: 72px 80px 100px;
+      max-width: 1280px; margin: 0 auto;
+    }
+
+    .tenant-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 48px 36px;
+    }
+
+    .tenant-card {
+      background: transparent;
+      overflow: visible;
+      cursor: pointer;
+    }
+    .tenant-card[style*="display: none"] { display: none !important; }
+
+    .tenant-card__img {
+      aspect-ratio: 1/1;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 20px;
+    }
+    .tenant-card__img img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .tenant-card:hover .tenant-card__img img { transform: scale(1.05); }
+
+    .tenant-card__cat {
+      position: absolute;
+      top: 14px; left: 14px;
+      font-size: 9.5px; font-weight: 500;
+      letter-spacing: 0.26em; text-transform: uppercase;
+      color: #fff;
+      background: rgba(10,8,6,0.56);
+      backdrop-filter: blur(10px);
+      padding: 5px 11px;
+      border-radius: 20px;
+    }
+
+    .tenant-card__body {
+      padding: 0;
+    }
+    .tenant-card__name {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px; font-weight: 400;
+      color: #1a1410; line-height: 1.2;
+      margin-bottom: 6px;
+      position: relative;
+      display: inline-block;
+    }
+    .tenant-card__name::after {
+      content: '';
+      position: absolute; bottom: -2px; left: 0;
+      width: 0%; height: 1px; background: var(--gold);
+      transition: width 0.34s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .tenant-card:hover .tenant-card__name::after { width: 100%; }
+
+    .tenant-card__suite {
+      display: block;
+      font-size: 10.5px; font-weight: 400;
+      letter-spacing: 0.3em; text-transform: uppercase;
+      color: rgba(26,20,16,0.70);
+      margin-bottom: 14px;
+      margin-top: 5px;
+    }
+    .tenant-card__link {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 10.5px; font-weight: 500;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      text-decoration: none;
+      color: rgba(26,20,16,0.74);
+      transition: color 0.25s;
+    }
+    .tenant-card__link:hover { color: var(--gold); }
+    .tenant-card__link svg { transition: transform 0.25s; }
+    .tenant-card__link:hover svg { transform: translateX(3px); }
+
+    /* No website placeholder */
+    .tenant-card__nolink {
+      font-size: 10.5px; font-weight: 400;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(26,20,16,0.65);
+    }
+
+    /* ── DINING CALLOUT ── */
+    .dining-callout {
+      background: var(--dark);
+      padding: 100px 80px;
+      margin-top: 2px;
+    }
+    .dining-callout__inner {
+      max-width: 1280px; margin: 0 auto;
+    }
+    .dining-callout__header {
+      display: flex; align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 60px;
+    }
+    .eyebrow {
+      display: block;
+      font-size: 11px; font-weight: 400;
+      letter-spacing: 0.46em; text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+    .eyebrow-gold { color: var(--gold); }
+    .display-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(34px, 4vw, 56px);
+      font-weight: 400; line-height: 1.1;
+      letter-spacing: -0.01em;
+    }
+    .display-title em { font-style: italic; }
+    .display-title.light { color: var(--cream); }
+
+    .dining-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .dining-card {
+      position: relative;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      border-radius: 2px;
+    }
+    .dining-card img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transition: transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .dining-card:hover img { transform: scale(1.06); }
+    .dining-card__overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 35%, rgba(10,8,6,0.88) 100%);
+    }
+    .dining-card__body {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 32px;
+    }
+    .dining-card__name {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px; font-weight: 400;
+      color: #fff; margin-bottom: 6px;
+    }
+    .dining-card__suite {
+      font-size: 11px; font-weight: 300;
+      letter-spacing: 0.24em; text-transform: uppercase;
+      color: rgba(255,255,255,0.68); margin-bottom: 14px;
+    }
+    .dining-card__link {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 11px; font-weight: 400;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      text-decoration: none;
+      color: rgba(255,255,255,0.75);
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      padding-bottom: 4px;
+      transition: color 0.25s, border-color 0.25s;
+    }
+    .dining-card__link:hover { color: var(--gold); border-color: var(--gold); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--dark); border-top: 1px solid rgba(255,255,255,0.06); }
+    .footer-inner {
+      max-width: 1280px; margin: 0 auto;
+      padding: 72px 80px;
+      display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--cream); margin-bottom: 8px; display: block;
+    }
+    .footer-sub {
+      font-size: 10.5px; font-weight: 300;
+      letter-spacing: 0.44em; text-transform: uppercase;
+      color: rgba(240,235,226,0.62); margin-bottom: 28px;
+    }
+    .footer-address {
+      font-size: 13px; font-weight: 300; line-height: 1.9;
+      color: rgba(240,235,226,0.72);
+    }
+    .footer-address a { color: rgba(240,235,226,0.72); text-decoration: none; transition: color 0.25s; }
+    .footer-address a:hover { color: rgba(240,235,226,0.9); }
+    .footer-col-title {
+      font-size: 10.5px; font-weight: 400;
+      letter-spacing: 0.38em; text-transform: uppercase;
+      color: rgba(240,235,226,0.62); margin-bottom: 24px;
+    }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 13px; }
+    .footer-links a {
+      font-size: 13px; font-weight: 300;
+      color: rgba(240,235,226,0.72); text-decoration: none;
+      letter-spacing: 0.04em; transition: color 0.25s;
+    }
+    .footer-links a:hover { color: rgba(240,235,226,0.9); }
+    .footer-bottom {
+      max-width: 1280px; margin: 0 auto;
+      padding: 24px 80px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-copy { font-size: 11.5px; font-weight: 300; color: rgba(240,235,226,0.62); letter-spacing: 0.06em; }
+    .footer-social { display: flex; gap: 24px; }
+    .footer-social a {
+      font-size: 11px; font-weight: 400; letter-spacing: 0.22em;
+      text-transform: uppercase; color: rgba(240,235,226,0.62);
+      text-decoration: none; transition: color 0.25s;
+    }
+    .footer-social a:hover { color: rgba(240,235,226,0.8); }
+
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="site-nav" id="siteNav">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-main">La Plaza</span>
+      <span class="nav-logo-sub">La Jolla</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="about.html">The Plaza</a></li>
+      <li><a href="shops.html" class="is-active">Shops</a></li>
+      <li><a href="shops.html#dining">Dining</a></li>
+      <li><a href="leasing.html">Leasing</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero__bg"></div>
+    <div class="page-hero__overlay"></div>
+    <div class="page-hero__content">
+      <span class="page-hero__eyebrow">La Jolla Luxury Shopping Center</span>
+      <h1 class="page-hero__title">Shops &amp; <em>Restaurants</em></h1>
+      <p class="page-hero__sub">Plan your day at La Plaza</p>
+    </div>
+  </section>
+
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar" id="filterBar">
+    <div class="filter-inner">
+      <button class="filter-btn active" data-filter="all" onclick="filterTenants('all')">All</button>
+      <button class="filter-btn" data-filter="play" onclick="filterTenants('play')">Wellness &amp; Beauty</button>
+      <button class="filter-btn" data-filter="shop" onclick="filterTenants('shop')">Shop</button>
+      <button class="filter-btn" data-filter="dine" onclick="filterTenants('dine')">Dine</button>
+      <span class="filter-count" id="filterCount">15 locations</span>
+    </div>
+  </div>
+
+
+  <!-- TENANT GRID -->
+  <div style="background:var(--cream); padding-top:2px;">
+    <div class="tenant-section">
+      <div class="tenant-grid" id="tenantGrid">
+
+        <!-- Thread + Seed -->
+        <div class="tenant-card" data-cat="shop">
+          <div class="tenant-card__img">
+            <img src="https://cdn.b12.io/client_media/Rfc3NbPx/3a51735c-b67a-11ef-a620-0242ac110002-jpeg-hero_image.jpeg" alt="Thread + Seed" />
+            <span class="tenant-card__cat">Shop</span>
+          </div>
+          <div class="tenant-card__body">
+            <div class="tenant-card__name">Thread + Seed</div>
+            <div class="tenant-card__suite">Suite 101</div>
+            <span class="tenant-card__nolink">In-store only</span>
+          </div>
+        </div>
+
+        <!-- The Smart Fit Method -->
+        <div class="tenant-card" data-cat="play">
+          <div class="tenant-card__img">
+            <img src="https://cdn.b12.io/client_media/Rfc3NbPx/4510370c-7c92-11ed-8355-0242ac110003-jpeg-hero_image.jpeg" alt="The Smart Fit Method" />
+            <span class="tenant-card__cat">Wellness</span>
+          </div>
+          <div class="tenant-card__body">
+            <div class="tenant-card__name">The Smart Fit Method</div>
+            <div class="tenant-card__suite">Suite 102</div>
+            <span class="tenant-card__nolink">In-studio only</span>
+          </div>
+        </div>
+
+        <!-- Elixir Espresso Bar -->
+        <div class="tenant-card" data-cat="dine">
+          <div class="tenant-card__img">
+            <img src="https://cdn.b12.io/client_media/Rfc3NbPx/688ec0dc-bd66-11eb-99f1-0242ac110002-jpg-hero_image.jpeg" alt="Elixir Espresso Bar" />
+            <span class="tenant-card__cat">Dine</span>
+          </div>
+          <div class="tenant-card__body">
+            <div class="tenant-card__name">Elixir Espresso Bar</div>
+            <div class="tenant-card__suite">Suite 105</div>
+            <a href="https://www.elixirespressobar.com/" target="_blank" rel="noopener" class="tenant-card__link">
+              Visit Website
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Bouluci Boutique -->
+        <div class="tenant-card" data-cat="shop">
+          <div class="tenant-card__img">
+            <img src="https://cdn.b12.io/client_media/Rfc3NbPx/77b6927a-5d9f-11ee-b9ef-0242ac110002-png-hero_image.png" alt="Bouluci Boutique" />
+            <span class="tenant-card__cat">Shop</span>
+          </div>
+          <div class="tenant-card__body">
+            <div class="tenant-card__name">Bouluci Boutique</div>
+            <div class="tenant-card__suite">Suite 106</div>
+            <a href="https://bouluciboutique.com/" target="_blank" rel="noopener" class="tenant-card__link">
+              Visit Website
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Ceragem -->
+        <div class="tenant-card" data-cat="play">
+          <div class="tenant-card__img">
+            <img src="https://cdn.b12.io/client_media/Rfc3NbPx/29923bb6-d2ad-11ee-ba55-0242ac110002-jpg-hero_image.jpeg" alt="Ceragem" />
+            <span class="tenant-card__cat">Wellness</span>
+          </div>
+          <div class="tenant-card__body">
+            <div class="tenant-card__name">Ceragem</div>
+            <div class="tenant-card__suite">Suite 107</div>
+            <a href="https://ceragemus.com/" target="_blank" rel="noopener" class="tenant-card__link">
+              Visit Website
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Browboss -->
+        <div class="tenant-card" data-cat="play">
+          <div class="tenant-card__img">
+            <img src="https://cdn.b12.io/client_media/Rfc3NbPx/7cb1ab74-bd66-11eb-bc3a-0242ac110002-jpg-regular_image.jpeg" alt="Browboss" />
+            <span class="tenant-card__cat">Beauty</span>
+          </div>
+          <div class="tenant-card__body">
+            <div class="tenant-card__name">Browboss</div>
+            <div class="tenant-card__suite">Suite 109</div>
+            <a href="https://browboss.com/" target="_blank" rel="noopener" class="tenant-card__link">
+              Visit Website
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- ONE|10 SALON -->
+        <div class="tenant-card" data-cat="play">
+          <div class="tenant-card__img">
+            <img src="https://cdn.b12.io/client_media/Rfc3NbPx/5acac3d0-bd69-11eb-bc3a-0242ac110002-jpg-hero_image.jpeg" alt="ONE|10 SALON" />
+            <span class="tenant-card__cat">Salon</span>
+          </div>
+          <div class="tenant-card__body">
+            <div class="tenant-card__name">ONE|10 SALON</div>
+            <div class="tenant-card__suite">Suite 110</div>
+            <a href="https://www.one10salon.com/" target="_blank" rel="noopener" class="tenant-card__link">
+              Visit Website
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- StretchLab -->
+        <div class="tenant-card" data-cat="play">
+          <div class="tenant-card__img">
+            <img src="https://cdn.b12.io/client_media/Rfc3NbPx/c04171be-d2ab-11ee-bdc8-0242ac110002-png-hero_image.png" alt="StretchLab" />
+            <span class="tenant-card__cat">Fitness</span>
+          </div>
+          <div class="tenant-card__body">
+            <div class="tenant-card__name">StretchLab</div>
+            <div class="tenant-card__suite">Suite 202</div>
+            <a href="https://www.stretchlab.com/location/lajolla" target="_blank" rel="noopener" class="tenant-card__link">
+              Visit Website
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Teuscher Chocolates -->
+        <div class="tenant-card" data-cat="shop">
+          <div class="tenant-card__img">
+            <img src="https://cdn.b12.io/client_media/Rfc3NbPx/a40e9128-bd66-11eb-9188-0242ac110003-jpg-regular_image.jpeg" alt="Teuscher Chocolates" />
+            <span class="tenant-card__cat">Shop · Dine</span>
+          </div>
+          <div class="tenant-card__body">
+            <div class="tenant-card__name">Teuscher Chocolates</div>
+            <div class="tenant-card__suite">Suite 204</div>
+            <a href="https://www.teuschersandiego.com/" target="_blank" rel="noopener" class="tenant-card__link">
+              Visit Website
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Compass -->
+        <div class="tenant-card" data-cat="shop">
+          <div class="tenant-card__img">
+            <img src="https://cdn.b12.io/client_media/Rfc3NbPx/077a158e-bd67-11eb-9188-0242ac110003-jpg-hero_image.jpeg" alt="Compass Real Estate" />
+            <span class="tenant-card__cat">Services</span>
+          </div>
+          <div class="tenant-card__body">
+            <div class="tenant-card__name">Compass</div>
+            <div class="tenant-card__suite">Suites 208 &amp; 210</div>
+            <a href="https://www.compass.com/" target="_blank" rel="noopener" class="tenant-card__link">
+              Visit Website
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- BlushTan -->
+        <div class="tenant-card" data-cat="play">
+          <div class="tenant-card__img">
+            <img src="https://cdn.b12.io/client_media/Rfc3NbPx/466fc706-bd68-11eb-9d73-0242ac110002-jpg-hero_image.jpeg" alt="BlushTan" />
+            <span class="tenant-card__cat">Beauty</span>
+          </div>
+          <div class="tenant-card__body">
+            <div class="tenant-card__name">BlushTan</div>
+            <div class="tenant-card__suite">Suite 305</div>
+            <a href="https://www.blushtan.com/lajolla" target="_blank" rel="noopener" class="tenant-card__link">
+              Visit Website
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Lucien -->
+        <div class="tenant-card" data-cat="dine">
+          <div class="tenant-card__img">
+            <img src="https://cdn.b12.io/client_media/Rfc3NbPx/b65a3750-d2ae-11ee-a6de-0242ac110002-png-hero_image.png" alt="Lucien" />
+            <span class="tenant-card__cat">Dine</span>
+          </div>
+          <div class="tenant-card__body">
+            <div class="tenant-card__name">Lucien</div>
+            <div class="tenant-card__suite">Suite 308</div>
+            <a href="https://luciensd.com/" target="_blank" rel="noopener" class="tenant-card__link">
+              Visit Website
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Catania -->
+        <div class="tenant-card" data-cat="dine">
+          <div class="tenant-card__img">
+            <img src="https://cdn.b12.io/client_media/Rfc3NbPx/569a2614-bd66-11eb-8ca4-0242ac110002-jpg-hero_image.jpeg" alt="Catania" />
+            <span class="tenant-card__cat">Dine</span>
+          </div>
+          <div class="tenant-card__body">
+            <div class="tenant-card__name">Catania</div>
+            <div class="tenant-card__suite">Suite 301</div>
+            <a href="https://www.cataniasd.com/" target="_blank" rel="noopener" class="tenant-card__link">
+              Visit Website
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Brilliant Earth -->
+        <div class="tenant-card" data-cat="shop">
+          <div class="tenant-card__img">
+            <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600&q=80" alt="Brilliant Earth" />
+            <span class="tenant-card__cat">Shop</span>
+          </div>
+          <div class="tenant-card__body">
+            <div class="tenant-card__name">Brilliant Earth</div>
+            <div class="tenant-card__suite">Fine Jewellery</div>
+            <a href="https://www.brilliantearth.com/san-diego-jewelers/" target="_blank" rel="noopener" class="tenant-card__link">
+              Visit Website
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- The Hydration Room -->
+        <div class="tenant-card" data-cat="play">
+          <div class="tenant-card__img">
+            <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=600&q=80" alt="The Hydration Room" />
+            <span class="tenant-card__cat">Wellness</span>
+          </div>
+          <div class="tenant-card__body">
+            <div class="tenant-card__name">The Hydration Room</div>
+            <div class="tenant-card__suite">Wellness</div>
+            <a href="https://hydrationroom.com/" target="_blank" rel="noopener" class="tenant-card__link">
+              Visit Website
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- DINING CALLOUT -->
+  <section class="dining-callout" id="dining">
+    <div class="dining-callout__inner">
+      <div class="dining-callout__header">
+        <div>
+          <span class="eyebrow eyebrow-gold">Dining at La Plaza</span>
+          <h2 class="display-title light">
+            Ocean Views. <em>Exceptional</em><br>
+            Flavors. One Address.
+          </h2>
+        </div>
+        <p style="font-size:15px; font-weight:300; line-height:1.75; color:rgba(240,235,226,0.72); max-width:380px;">
+          From gourmet espresso at sunrise to candlelit Mediterranean dinners with sweeping Pacific views — every meal at La Plaza is an occasion.
+        </p>
+      </div>
+
+      <div class="dining-grid">
+
+        <div class="dining-card">
+          <img src="https://cdn.b12.io/client_media/Rfc3NbPx/688ec0dc-bd66-11eb-99f1-0242ac110002-jpg-hero_image.jpeg" alt="Elixir Espresso Bar" />
+          <div class="dining-card__overlay"></div>
+          <div class="dining-card__body">
+            <div class="dining-card__name">Elixir Espresso Bar</div>
+            <div class="dining-card__suite">Suite 105 · Café</div>
+            <a href="https://www.elixirespressobar.com/" target="_blank" rel="noopener" class="dining-card__link">
+              Visit
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="dining-card">
+          <img src="https://cdn.b12.io/client_media/Rfc3NbPx/569a2614-bd66-11eb-8ca4-0242ac110002-jpg-hero_image.jpeg" alt="Catania" />
+          <div class="dining-card__overlay"></div>
+          <div class="dining-card__body">
+            <div class="dining-card__name">Catania</div>
+            <div class="dining-card__suite">Suite 301 · Mediterranean</div>
+            <a href="https://www.cataniasd.com/" target="_blank" rel="noopener" class="dining-card__link">
+              Visit
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="dining-card">
+          <img src="https://cdn.b12.io/client_media/Rfc3NbPx/b65a3750-d2ae-11ee-a6de-0242ac110002-png-hero_image.png" alt="Lucien" />
+          <div class="dining-card__overlay"></div>
+          <div class="dining-card__body">
+            <div class="dining-card__name">Lucien</div>
+            <div class="dining-card__suite">Suite 308 · Restaurant</div>
+            <a href="https://luciensd.com/" target="_blank" rel="noopener" class="dining-card__link">
+              Visit
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <span class="footer-logo">La Plaza</span>
+        <span class="footer-sub">La Jolla</span>
+        <div class="footer-address">
+          7863–7877 Girard Avenue<br>La Jolla, CA 92037<br><br>
+          <a href="tel:8588763945">(858) 876-3945</a><br>
+          <a href="mailto:laplazapm@regentproperties.com">laplazapm@regentproperties.com</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer-col-title">Explore</p>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="shops.html">Shops &amp; Restaurants</a></li>
+          <li><a href="leasing.html">Leasing</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Connect</p>
+        <ul class="footer-links">
+          <li><a href="https://www.facebook.com/LaPlazaLaJolla" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="https://twitter.com/laplazalajolla" target="_blank" rel="noopener">Twitter / X</a></li>
+          <li><a href="https://instagram.com/laplazalajolla" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.yelp.com/biz/la-plaza-la-jolla-san-diego" target="_blank" rel="noopener">Yelp</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2025 La Plaza La Jolla. Property managed by Regent Properties, LLC.</span>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/LaPlazaLaJolla" target="_blank" rel="noopener">FB</a>
+        <a href="https://instagram.com/laplazalajolla" target="_blank" rel="noopener">IG</a>
+        <a href="https://twitter.com/laplazalajolla" target="_blank" rel="noopener">X</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <script>
+    // Scroll-aware nav
+    const nav = document.getElementById('siteNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+
+    // Tenant filter
+    function filterTenants(cat) {
+      const cards = document.querySelectorAll('.tenant-card');
+      const btns  = document.querySelectorAll('.filter-btn');
+      const count = document.getElementById('filterCount');
+
+      btns.forEach(b => b.classList.toggle('active', b.dataset.filter === cat));
+
+      let visible = 0;
+      cards.forEach(card => {
+        const show = cat === 'all' || card.dataset.cat === cat;
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+
+      count.textContent = visible + ' location' + (visible !== 1 ? 's' : '');
+
+      // Reflow grid so no phantom gaps
+      const grid = document.getElementById('tenantGrid');
+      grid.style.display = 'none';
+      grid.offsetHeight; // force reflow
+      grid.style.display = '';
+    }
+  </script>
+
+</body>
+</html>
