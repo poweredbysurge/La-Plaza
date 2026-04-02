@@ -614,10 +614,14 @@
       .page-hero { min-height: 420px; }
       .page-hero__content { padding: 0 24px 48px !important; }
 
-      /* Tenant grid → single column */
-      .tenant-section { padding: 40px 20px 60px !important; }
-      .tenant-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
-      .tenant-card__img { height: 220px; }
+      /* Tenant grid → single column, full-width images */
+      .tenant-section { padding: 40px 16px 60px !important; }
+      .tenant-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+      .tenant-card__img {
+        width: 100%;
+        aspect-ratio: 4/3;
+        height: auto;
+      }
 
       /* Filter bar */
       .filter-inner { padding: 14px 20px; gap: 8px; flex-wrap: wrap; }
