@@ -905,7 +905,13 @@
     /* ── MOBILE SLIDE OVERRIDES ── */
     @media (max-width: 767px) {
 
-      /* ── NAV: solid bar so content loads below it ── */
+      /* ── BODY: normal scroll on mobile ── */
+      html, body {
+        overflow: auto !important;
+        height: auto !important;
+      }
+
+      /* ── NAV: solid fixed bar ── */
       .site-nav {
         background: rgba(10,8,6,0.95);
         padding: 0 20px;
@@ -914,13 +920,34 @@
         pointer-events: all;
       }
 
-      /* ── SWIPER: starts below nav, fills remaining viewport ── */
+      /* ── SWIPER: disable carousel, make slides scroll naturally ── */
       .swiper {
-        height: calc(100vh - 60px);
+        height: auto !important;
+        overflow: visible !important;
         margin-top: 60px;
       }
+      .swiper-wrapper {
+        transform: none !important;
+        height: auto !important;
+        flex-direction: column !important;
+        will-change: unset !important;
+        transition: none !important;
+      }
+      /* Each slide = one full viewport section */
+      .swiper-slide {
+        height: 100vh !important;  /* fallback */
+        height: 100svh !important; /* small viewport height = no browser-chrome bleed */
+        width: 100% !important;
+      }
 
-      /* Hide side dots on mobile — not enough room */
+      /* Smooth CSS scroll-snap per section */
+      html {
+        scroll-snap-type: y mandatory;
+        -webkit-overflow-scrolling: touch;
+      }
+      .swiper-slide { scroll-snap-align: start; }
+
+      /* Hide side dots — not applicable in scroll mode */
       .slide-dots { display: none; }
 
       /* Hero slide */
@@ -928,7 +955,7 @@
       .hero__scroll { display: none; }
 
       /* About slide — full-bleed image, text pinned to bottom */
-      .s-about { position: relative; overflow: hidden; display: block !important; }
+      .s-about { position: relative; overflow: hidden; }
       .s-about__image {
         position: absolute !important;
         inset: 0 !important;
@@ -998,7 +1025,7 @@
       .dining-card__suite { margin-top: 6px; }
 
       /* Leasing slide — full-bleed image, text pinned to bottom */
-      .s-leasing { position: relative; overflow: hidden; display: block !important; }
+      .s-leasing { position: relative; overflow: hidden; }
       .s-leasing__image {
         position: absolute !important;
         inset: 0 !important;
@@ -1396,71 +1423,60 @@
   <script>
 
     const SLIDE_COUNT = 6;
-
     const dotsWrap  = document.getElementById('slideDots');
     const navLinks  = document.querySelectorAll('.nav-links a');
 
-    /* ── Build dots ── */
-    for (let i = 0; i < SLIDE_COUNT; i++) {
-      const d = document.createElement('button');
-      d.type = 'button';
-      d.className = 'sdot' + (i === 0 ? ' active' : '');
-      d.setAttribute('aria-label', `Go to slide ${i + 1}`);
-      d.addEventListener('click', () => swiper.slideTo(i));
-      dotsWrap.appendChild(d);
-    }
-    const dots = dotsWrap.querySelectorAll('.sdot');
+    /* ── Desktop only: Swiper carousel + dots + wheel handler ── */
+    if (window.innerWidth >= 768) {
 
-    /* ── Update active dots + nav link ── */
-    function updateTheme(idx) {
-      dots.forEach((d, i) => d.classList.toggle('active', i === idx));
-      // Mark active nav link (skip hero — idx 0 has no matching nav item)
-      navLinks.forEach((a, i) => a.classList.toggle('is-active', i === idx - 1));
-    }
-
-    /* ── Init Swiper ── */
-    const swiper = new Swiper('.swiper', {
-      direction:   'vertical',
-      speed:       1000,
-      effect:      'creative',
-      mousewheel:  false,
-      keyboard: {
-        enabled: true,
-      },
-      creativeEffect: {
-        prev: {
-          shadow:    false,
-          translate: [0, 0, -1],
-        },
-        next: {
-          translate: [0, '100%', 1],
-        },
-      },
-      on: {
-        slideChange() {
-          updateTheme(this.activeIndex);
-        },
-      },
-    });
-
-    // Custom scroll handler — one gesture = one slide, no multi-skip
-    let scrollLocked = false;
-
-    window.addEventListener('wheel', function(e) {
-      e.preventDefault();
-      if (scrollLocked) return;
-
-      const delta = e.deltaY;
-      if (Math.abs(delta) < 5) return;
-
-      scrollLocked = true;
-      if (delta > 0) {
-        swiper.slideNext();
-      } else {
-        swiper.slidePrev();
+      /* Build dots */
+      for (let i = 0; i < SLIDE_COUNT; i++) {
+        const d = document.createElement('button');
+        d.type = 'button';
+        d.className = 'sdot' + (i === 0 ? ' active' : '');
+        d.setAttribute('aria-label', `Go to slide ${i + 1}`);
+        dotsWrap.appendChild(d);
       }
-      setTimeout(() => { scrollLocked = false; }, 1100);
-    }, { passive: false });
+      const dots = dotsWrap.querySelectorAll('.sdot');
+
+      function updateTheme(idx) {
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+        navLinks.forEach((a, i) => a.classList.toggle('is-active', i === idx - 1));
+      }
+
+      /* Init Swiper */
+      const swiper = new Swiper('.swiper', {
+        direction:   'vertical',
+        speed:       1000,
+        effect:      'creative',
+        mousewheel:  false,
+        keyboard: { enabled: true },
+        creativeEffect: {
+          prev: { shadow: false, translate: [0, 0, -1] },
+          next: { translate: [0, '100%', 1] },
+        },
+        on: {
+          slideChange() { updateTheme(this.activeIndex); },
+        },
+      });
+
+      /* Wire dots to swiper after init */
+      dots.forEach((d, i) => d.addEventListener('click', () => swiper.slideTo(i)));
+
+      /* Custom wheel handler — one gesture = one slide */
+      let scrollLocked = false;
+      window.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        if (scrollLocked) return;
+        const delta = e.deltaY;
+        if (Math.abs(delta) < 5) return;
+        scrollLocked = true;
+        if (delta > 0) swiper.slideNext();
+        else swiper.slidePrev();
+        setTimeout(() => { scrollLocked = false; }, 1100);
+      }, { passive: false });
+
+    } /* end desktop-only block */
 
     // Hamburger menu
     const hamburger = document.getElementById('navHamburger');
