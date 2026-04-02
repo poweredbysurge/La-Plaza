@@ -150,7 +150,6 @@
 
     /* ── PROPERTY HIGHLIGHTS ── */
     .highlights-section { background: var(--dark); }
-    .highlights-swipe-hint { display: none; }
     .highlights-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -552,36 +551,9 @@
       /* Leasing highlights list */
       .lh-row { padding: 12px 0; }
 
-      /* Property Highlights → horizontal scroll-snap carousel */
-      .highlights-section .inner { padding-bottom: 0 !important; }
-      .highlights-grid {
-        display: flex !important;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-        gap: 1px;
-        padding: 0 0 48px;
-      }
-      .highlights-grid::-webkit-scrollbar { display: none; }
-      .highlight-block {
-        flex: 0 0 72vw;
-        scroll-snap-align: start;
-        padding: 44px 28px 36px;
-      }
-      /* First card gets left margin to sit flush with page edge */
-      .highlight-block:first-child { margin-left: 0; }
-      /* Swipe hint text */
-      .highlights-swipe-hint {
-        display: block;
-        text-align: center;
-        font-size: 10px;
-        letter-spacing: 0.3em;
-        text-transform: uppercase;
-        color: rgba(240,235,226,0.35);
-        padding-bottom: 32px;
-      }
+      /* Property Highlights → vertical stack */
+      .highlights-grid { grid-template-columns: 1fr !important; gap: 1px; }
+      .highlight-block { padding: 44px 28px 36px; }
 
       /* Suites row */
       .suites-row { flex-wrap: wrap !important; gap: 10px !important; }
@@ -778,7 +750,6 @@
       </div>
 
     </div>
-    <p class="highlights-swipe-hint" aria-hidden="true">Swipe to explore</p>
   </section>
 
 
