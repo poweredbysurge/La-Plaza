@@ -927,28 +927,48 @@
       .s-hero__content { padding: 0 24px 48px; }
       .hero__scroll { display: none; }
 
-      /* About slide — stack image (top) then text (bottom) */
-      .s-about { flex-direction: column !important; overflow: hidden; }
+      /* About slide — full-bleed image, text pinned to bottom */
+      .s-about { position: relative; overflow: hidden; display: block !important; }
       .s-about__image {
-        width: 100%;
-        flex: 0 0 40vh;
-        min-height: 40vh;
-        max-height: 40vh;
+        position: absolute !important;
+        inset: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        max-height: none !important;
+        flex: none !important;
       }
       .s-about__image img { width: 100%; height: 100%; object-fit: cover; }
-      .s-about__body {
-        flex: 1 1 auto;
-        min-height: 0;
-        padding: 28px 24px;
-        overflow-y: scroll;
-        -webkit-overflow-scrolling: touch;
+      .s-about__image::after {
+        background: linear-gradient(
+          to top,
+          rgba(12,11,9,0.94) 0%,
+          rgba(12,11,9,0.65) 42%,
+          rgba(12,11,9,0.15) 100%
+        ) !important;
       }
-      .about__stats { flex-wrap: wrap; gap: 20px; margin-top: 24px; padding-top: 20px; }
-      .stat dt { font-size: 26px; }
+      .s-about__body {
+        position: absolute !important;
+        inset: auto 0 0 0 !important;
+        padding: 32px 24px !important;
+        overflow: visible !important;
+        z-index: 2;
+      }
+      .s-about__body .body-p { display: none; }
+      .s-about__body .about__stats { display: none; }
 
-      /* Shops slide */
+      /* Shops slide — compact header, grid fills remaining space */
       .s-shops { flex-direction: column !important; }
-      .s-shops__left { width: 100% !important; padding: 28px 24px; overflow-y: auto; max-height: 52%; }
+      .s-shops__left {
+        width: 100% !important;
+        padding: 32px 24px 20px !important;
+        overflow: visible !important;
+        flex: 0 0 auto !important;
+        max-height: none !important;
+      }
+      .s-shops__left .body-p { display: none; }
+      .s-shops__left .tenant-list { display: none; }
+      .s-shops__left .h2 { font-size: 28px !important; margin-bottom: 18px; }
+      .s-shops__left .eyebrow { margin-bottom: 14px; }
       .s-shops__grid { flex: 1; min-height: 0; gap: 2px; }
 
       /* Dining slide — single scrollable column, vertically centered */
@@ -977,26 +997,47 @@
       .dining-card__desc { font-size: 12.5px; line-height: 1.55; }
       .dining-card__suite { margin-top: 6px; }
 
-      /* Leasing slide — stack image (top) then text (bottom) */
-      .s-leasing { flex-direction: column !important; overflow: hidden; }
+      /* Leasing slide — full-bleed image, text pinned to bottom */
+      .s-leasing { position: relative; overflow: hidden; display: block !important; }
       .s-leasing__image {
-        width: 100%;
-        flex: 0 0 35vh;
-        min-height: 35vh;
-        max-height: 35vh;
+        position: absolute !important;
+        inset: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        max-height: none !important;
+        flex: none !important;
       }
       .s-leasing__image img { width: 100%; height: 100%; object-fit: cover; }
-      .s-leasing__body {
-        flex: 1 1 auto;
-        min-height: 0;
-        padding: 28px 24px;
-        overflow-y: scroll;
-        -webkit-overflow-scrolling: touch;
+      .s-leasing__image::after {
+        background: linear-gradient(
+          to top,
+          rgba(10,8,6,0.95) 0%,
+          rgba(10,8,6,0.65) 42%,
+          rgba(10,8,6,0.15) 100%
+        ) !important;
       }
-      .leasing-highlights { margin: 16px 0 18px; }
-      .lh-row { padding: 10px 0; }
-      .suites-row { flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
-      .leasing-btn { width: 100%; text-align: center; justify-content: center; }
+      .s-leasing__body {
+        position: absolute !important;
+        inset: auto 0 0 0 !important;
+        padding: 32px 24px !important;
+        overflow: visible !important;
+        z-index: 2;
+      }
+      /* Flip text colors to light — body is now on dark image overlay */
+      .s-leasing__body .eyebrow-dark { color: #c4a052 !important; }
+      .s-leasing__body .h2-dark { color: #f0ebe2 !important; }
+      /* Hide overflow content — teaser only on mobile */
+      .s-leasing__body .body-p { display: none; }
+      .s-leasing__body .leasing-highlights { display: none; }
+      .s-leasing__body .suites-row { display: none; }
+      .leasing-btn {
+        background: rgba(255,255,255,0.12) !important;
+        border: 1px solid rgba(255,255,255,0.35) !important;
+        color: #f0ebe2 !important;
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+      }
 
       /* Contact slide */
       .s-contact__inner {
