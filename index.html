@@ -918,20 +918,23 @@
         height: auto !important;
       }
 
-      /* ── NAV: solid fixed bar ── */
+      /* ── NAV: transparent overlay, turns solid on scroll ── */
       .site-nav {
-        background: rgba(10,8,6,0.95);
-        padding: 0 20px;
-        height: 60px;
+        background: transparent;
+        padding: 16px 20px;
+        height: auto;
         align-items: center;
         pointer-events: all;
+      }
+      .site-nav.scrolled {
+        background: rgba(10,8,6,0.95);
       }
 
       /* ── SWIPER: disable carousel, make slides scroll naturally ── */
       .swiper {
         height: auto !important;
         overflow: visible !important;
-        margin-top: 60px;
+        margin-top: 0;
       }
       .swiper-wrapper {
         transform: none !important;
@@ -1797,6 +1800,14 @@
     menuClose.addEventListener('click', closeMenu);
     mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+
+    // Mobile: transparent nav turns solid after scrolling past hero
+    if (window.innerWidth < 768) {
+      const siteNav = document.getElementById('siteNav');
+      window.addEventListener('scroll', function () {
+        siteNav.classList.toggle('scrolled', window.scrollY > window.innerHeight * 0.7);
+      }, { passive: true });
+    }
 
     // ── Tenant Modal ──
     let tmImages = [], tmIdx = 0;
