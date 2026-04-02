@@ -258,27 +258,56 @@
     .mgmt-strip__email:hover { color: var(--gold); }
 
     /* ── FOOTER ── */
-    footer { background: var(--dark); border-top: 1px solid rgba(255,255,255,0.05); }
+    footer { background: var(--dark); border-top: 1px solid rgba(255,255,255,0.06); }
     .footer-inner {
-      max-width: 1280px; margin: 0 auto; padding: 72px 80px;
+      max-width: 1280px; margin: 0 auto;
+      padding: 72px 80px;
       display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px;
     }
-    .footer-logo { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cream); margin-bottom: 8px; display: block; }
-    .footer-sub { font-size: 10.5px; font-weight: 300; letter-spacing: 0.44em; text-transform: uppercase; color: rgba(240,235,226,0.62); margin-bottom: 28px; }
-    .footer-address { font-size: 13px; font-weight: 300; line-height: 1.9; color: rgba(240,235,226,0.72); }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--cream); margin-bottom: 8px; display: block;
+    }
+    .footer-sub {
+      font-size: 10.5px; font-weight: 300;
+      letter-spacing: 0.44em; text-transform: uppercase;
+      color: rgba(240,235,226,0.62); margin-bottom: 28px;
+    }
+    .footer-address {
+      font-size: 13px; font-weight: 300; line-height: 1.9;
+      color: rgba(240,235,226,0.72);
+    }
     .footer-address a { color: rgba(240,235,226,0.72); text-decoration: none; transition: color 0.25s; }
     .footer-address a:hover { color: rgba(240,235,226,0.9); }
-    .footer-col-title { font-size: 10.5px; font-weight: 400; letter-spacing: 0.38em; text-transform: uppercase; color: rgba(240,235,226,0.62); margin-bottom: 24px; }
+    .footer-col-title {
+      font-size: 10.5px; font-weight: 400;
+      letter-spacing: 0.38em; text-transform: uppercase;
+      color: rgba(240,235,226,0.62); margin-bottom: 24px;
+    }
     .footer-links { list-style: none; }
     .footer-links li { margin-bottom: 13px; }
-    .footer-links a { font-size: 13px; font-weight: 300; color: rgba(240,235,226,0.72); text-decoration: none; letter-spacing: 0.04em; transition: color 0.25s; }
+    .footer-links a {
+      font-size: 13px; font-weight: 300;
+      color: rgba(240,235,226,0.72); text-decoration: none;
+      letter-spacing: 0.04em; transition: color 0.25s;
+    }
     .footer-links a:hover { color: rgba(240,235,226,0.9); }
-    .footer-bottom { max-width: 1280px; margin: 0 auto; padding: 24px 80px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; }
+    .footer-bottom {
+      max-width: 1280px; margin: 0 auto;
+      padding: 24px 80px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      display: flex; justify-content: space-between; align-items: center;
+    }
     .footer-copy { font-size: 11.5px; font-weight: 300; color: rgba(240,235,226,0.62); letter-spacing: 0.06em; }
     .footer-social { display: flex; gap: 24px; }
-    .footer-social a { font-size: 11px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(240,235,226,0.62); text-decoration: none; transition: color 0.25s; }
+    .footer-social a {
+      font-size: 11px; font-weight: 400; letter-spacing: 0.22em;
+      text-transform: uppercase; color: rgba(240,235,226,0.62);
+      text-decoration: none; transition: color 0.25s;
+    }
     .footer-social a:hover { color: rgba(240,235,226,0.8); }
-
     .footer-mgmt { margin-top: 28px; }
     .footer-mgmt-label { font-size: 9px; font-weight: 400; letter-spacing: 0.32em; text-transform: uppercase; color: rgba(240,235,226,0.4); display: block; margin-bottom: 8px; }
     .footer-mgmt-badge { display: inline-flex; align-items: center; background: transparent; padding: 0; }
@@ -361,9 +390,6 @@
 
     /* ── FOCUS VISIBLE ── */
     :focus-visible { outline: 2px solid #c4a052; outline-offset: 3px; }
-
-    /* ── FOOTER TOUCH TARGETS ── */
-    .footer-links a { padding: 6px 0; min-height: 44px; display: flex; align-items: center; }
 
     /* ── RESPONSIVE: MOBILE ── */
     @media (max-width: 767px) {
