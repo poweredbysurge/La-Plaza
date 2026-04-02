@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About — La Plaza La Jolla</title>
-  <meta name="description" content="Boutique retailers, exceptional dining options & premier personal services in the heart of La Jolla. Learn about La Plaza La Jolla." />
+  <meta name="description" content="Boutique retailers, exceptional dining options &amp; premier personal services in the heart of La Jolla. Learn about La Plaza La Jolla." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -29,6 +29,27 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    /* ── SKIP LINK ── */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 16px;
+      background: #c4a052;
+      color: #0a0806;
+      padding: 10px 18px;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      z-index: 9999;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: 16px; }
+
+    /* ── FOCUS VISIBLE ── */
+    :focus-visible { outline: 2px solid #c4a052; outline-offset: 3px; }
+    .nav-links a { padding: 6px 0; display: inline-block; }
+
     /* ── NAV ── */
     .site-nav {
       position: fixed;
@@ -47,20 +68,10 @@
       -webkit-backdrop-filter: blur(14px);
       padding: 20px 64px;
     }
-    .nav-logo { text-decoration: none; pointer-events: all; }
-    .nav-logo-main {
-      display: block;
-      font-family: 'Playfair Display', serif;
-      font-size: 20px;
-      font-weight: 600;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: #fff;
-      line-height: 1;
-      transition: opacity 0.3s;
-    }
-    .nav-logo:hover .nav-logo-main { opacity: 0.72; }
-    .nav-logo-sub {
+    .nav-logo { text-decoration: none; pointer-events: all; transition: opacity 0.3s; }
+    .nav-logo:hover { opacity: 0.72; }
+    .nav-logo img { height: 55px; width: auto; display: block; filter: brightness(0) invert(1); }
+    .nav-logo-sub-UNUSED {
       display: block;
       font-size: 11px;
       font-weight: 300;
@@ -94,6 +105,64 @@
     .nav-links a:hover::after { width: 100%; }
     .nav-links a.is-active { color: #fff; }
     .nav-links a.is-active::after { width: 100%; background: rgba(196,160,82,0.55); }
+
+    /* ── HAMBURGER & MOBILE MENU ── */
+    .nav-hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      min-width: 44px;
+      min-height: 44px;
+      color: #fff;
+      font-size: 24px;
+      line-height: 1;
+      position: relative;
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(10,8,6,0.97);
+      z-index: 1000;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .mobile-menu.is-open { display: flex; }
+    .mobile-menu a {
+      font-size: 18px;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(240,235,226,0.85);
+      text-decoration: none;
+      padding: 16px 32px;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: #c4a052; }
+    .mobile-menu__close {
+      position: absolute;
+      top: 20px; right: 20px;
+      background: none; border: none;
+      color: rgba(240,235,226,0.7);
+      font-size: 28px; line-height: 1;
+      cursor: pointer;
+      min-width: 44px; min-height: 44px;
+      display: flex; align-items: center; justify-content: center;
+      transition: color 0.2s;
+    }
+    .mobile-menu__close:hover { color: #c4a052; }
+    @media (max-width: 1023px) {
+      .nav-hamburger { display: flex; align-items: center; justify-content: center; }
+      .nav-links { display: none !important; }
+      .nav-logo img { height: 40px; }
+    }
+    body.menu-open { overflow: hidden; }
 
     /* ── PAGE HERO ── */
     .page-hero {
@@ -450,6 +519,9 @@
       text-decoration: none;
       letter-spacing: 0.04em;
       transition: color 0.25s;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
     }
     .footer-links a:hover { color: rgba(240,235,226,0.9); }
     .footer-bottom {
@@ -481,18 +553,61 @@
 
     .footer-mgmt { margin-top: 28px; }
     .footer-mgmt-label { font-size: 9px; font-weight: 400; letter-spacing: 0.32em; text-transform: uppercase; color: rgba(240,235,226,0.4); display: block; margin-bottom: 8px; }
-    .footer-mgmt-badge { display: inline-flex; align-items: center; background: rgba(255,255,255,0.92); padding: 7px 14px; border-radius: 6px; }
-    .footer-mgmt-badge img { height: 26px; width: auto; display: block; }
+    .footer-mgmt-badge { display: inline-flex; align-items: center; background: transparent; padding: 0; }
+    .footer-mgmt-badge img { height: 52px; width: auto; display: block; }
+
+    /* ── RESPONSIVE: MOBILE ── */
+    @media (max-width: 767px) {
+      /* Nav */
+      .site-nav { padding: 16px 20px; }
+
+      /* Page hero */
+      .page-hero { min-height: 420px; }
+      .page-hero__content { padding: 0 24px 48px; }
+
+      /* Inner sections */
+      .inner,
+      [class*="section"] > div,
+      section > div { padding-left: 24px !important; padding-right: 24px !important; }
+
+      /* Any two-column grid → single column */
+      .regent-grid,
+      .regent-grid__inner { grid-template-columns: 1fr !important; gap: 40px !important; }
+
+      /* Intro grid single column */
+      .intro-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+
+      /* Stats row */
+      .stats-row { grid-template-columns: 1fr !important; padding: 60px 24px; }
+      .stat-block { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+      .stat-block:last-child { border-bottom: none; }
+
+      /* Gallery/feature grids */
+      [class*="gallery"],
+      [class*="grid"]:not(.footer-inner) { grid-template-columns: 1fr !important; gap: 16px !important; }
+
+      /* Footer */
+      .footer-inner { grid-template-columns: 1fr !important; gap: 40px; padding: 48px 24px !important; }
+      .footer-bottom { flex-direction: column; gap: 16px; padding: 24px; text-align: center; }
+      .footer-social { justify-content: center; }
+    }
+
+    /* ── RESPONSIVE: TABLET ── */
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .site-nav { padding: 20px 32px; }
+      .footer-inner { grid-template-columns: 1fr 1fr !important; padding: 60px 40px !important; }
+    }
 
   </style>
 </head>
 <body>
 
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <!-- NAV -->
   <nav class="site-nav" id="siteNav">
     <a href="index.html" class="nav-logo">
-      <span class="nav-logo-main">La Plaza</span>
-      <span class="nav-logo-sub">La Jolla</span>
+      <img src="images/La%20Plaza%20Logo.svg" alt="La Plaza La Jolla" />
     </a>
     <ul class="nav-links">
       <li><a href="about.html" class="is-active">The Plaza</a></li>
@@ -501,13 +616,24 @@
       <li><a href="leasing.html">Leasing</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open navigation" aria-expanded="false" aria-controls="mobileMenu">&#9776;</button>
   </nav>
 
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+    <button class="mobile-menu__close" id="menuClose" aria-label="Close navigation">&#10005;</button>
+    <a href="index.html">Home</a>
+    <a href="about.html">The Plaza</a>
+    <a href="shops.html">Shops &amp; Restaurants</a>
+    <a href="leasing.html">Leasing</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <main id="main-content">
 
   <!-- PAGE HERO -->
   <section class="page-hero">
-    <div class="page-hero__bg"></div>
-    <div class="page-hero__overlay"></div>
+    <div class="page-hero__bg" aria-hidden="true"></div>
+    <div class="page-hero__overlay" aria-hidden="true"></div>
     <div class="page-hero__content">
       <span class="page-hero__eyebrow">La Jolla, California</span>
       <h1 class="page-hero__title">About La Plaza<br><em>Shopping Center</em></h1>
@@ -561,7 +687,7 @@
       <p class="pull-quote__text">
         "Located at the iconic corner of Wall Street &amp; Girard Avenue — La Plaza has been transformatively renovated into a stunning open-air galleria awash in Southern California ambiance, complete with panoramic ocean views and Spanish and Moroccan design elements."
       </p>
-      <div class="pull-quote__rule"></div>
+      <div class="pull-quote__rule" aria-hidden="true"></div>
     </div>
   </section>
 
@@ -573,19 +699,19 @@
         <span class="eyebrow eyebrow-dark" style="display:inline-block;">What Makes Us Unique</span>
         <h2 class="display-title dark" style="max-width:560px; margin:0 auto;">The La Jolla<br><em>Difference</em></h2>
       </div>
-      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:rgba(26,20,16,0.08);">
+      <div class="highlights-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:rgba(26,20,16,0.08);">
         <div style="background:#f7f3ec; padding:52px 44px;">
-          <div style="width:36px; height:1px; background:var(--gold); margin-bottom:28px;"></div>
+          <div style="width:36px; height:1px; background:var(--gold); margin-bottom:28px;" aria-hidden="true"></div>
           <h3 style="font-family:'Playfair Display',serif; font-size:22px; font-weight:400; color:var(--text); margin-bottom:16px; line-height:1.2;">7 Million<br><em>Annual Visitors</em></h3>
           <p style="font-size:14px; font-weight:300; line-height:1.75; color:rgba(26,20,16,0.74);">La Jolla beaches draw millions of visitors each year, delivering consistent year-round foot traffic to every business at La Plaza.</p>
         </div>
         <div style="background:#f7f3ec; padding:52px 44px;">
-          <div style="width:36px; height:1px; background:var(--gold); margin-bottom:28px;"></div>
+          <div style="width:36px; height:1px; background:var(--gold); margin-bottom:28px;" aria-hidden="true"></div>
           <h3 style="font-family:'Playfair Display',serif; font-size:22px; font-weight:400; color:var(--text); margin-bottom:16px; line-height:1.2;">Iconic Hard<br><em>Corner Location</em></h3>
           <p style="font-size:14px; font-weight:300; line-height:1.75; color:rgba(26,20,16,0.74);">Situated at the intersection of Wall Street &amp; Girard Avenue — the most visible and trafficked corner in La Jolla Village.</p>
         </div>
         <div style="background:#f7f3ec; padding:52px 44px;">
-          <div style="width:36px; height:1px; background:var(--gold); margin-bottom:28px;"></div>
+          <div style="width:36px; height:1px; background:var(--gold); margin-bottom:28px;" aria-hidden="true"></div>
           <h3 style="font-family:'Playfair Display',serif; font-size:22px; font-weight:400; color:var(--text); margin-bottom:16px; line-height:1.2;">Open-Air<br><em>Luxury Galleria</em></h3>
           <p style="font-size:14px; font-weight:300; line-height:1.75; color:rgba(26,20,16,0.74);">A transformatively renovated open-air environment with Spanish and Moroccan architectural elements and sweeping Pacific views.</p>
         </div>
@@ -602,23 +728,23 @@
         <div class="regent-grid__img">
           <img
             src="https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=960&q=82"
-            alt="Regent Properties — real estate investment"
+            alt="Reef Real Estate Services — property management"
           />
         </div>
 
         <div class="regent-grid__text">
-          <span class="eyebrow eyebrow-light">Owner &amp; Developer</span>
+          <span class="eyebrow eyebrow-light">Property Management &amp; Leasing</span>
           <h2 class="display-title light">
-            A Leader in Real Estate<br>
-            Development &amp; <em>Investment</em>
+            Expert Real Estate<br>
+            Management &amp; <em>Leasing</em>
           </h2>
           <div class="body-copy light" style="margin-top:28px; margin-bottom:40px;">
-            <p>Founded in 1989, Regent Properties, LLC is an SEC-registered investment advisor and a real estate investment management and development firm based in Los Angeles and Dallas.</p>
-            <p>The company is a vertically integrated operator and fund manager with current investments concentrated in six Sun Belt markets — managing a variety of investment vehicles on behalf of a sophisticated institutional investor base.</p>
+            <p>Founded in 2012, Reef Real Estate Services is a full-service commercial real estate brokerage and property management firm headquartered in San Diego, CA.</p>
+            <p>Reef brings deep local market expertise and a hands-on approach to property management and leasing, serving owners and tenants across Southern California's most desirable retail and mixed-use destinations.</p>
           </div>
-          <a href="https://www.regentproperties.com/" target="_blank" rel="noopener" class="btn-light">
+          <a href="https://www.reefrealestate.com/" target="_blank" rel="noopener" class="btn-light" aria-label="Learn more about Reef Real Estate Services (opens in new tab)">
             Learn More
-            <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true" focusable="false">
               <path d="M1.5 6.5h10M7.5 2.5l4 4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </a>
@@ -634,17 +760,17 @@
     <div class="stats-row">
       <div class="stat-block">
         <div class="stat-block__num">7M<sup>+</sup></div>
-        <div class="stat-block__divider"></div>
+        <div class="stat-block__divider" aria-hidden="true"></div>
         <div class="stat-block__label">Annual Visitors to La Jolla</div>
       </div>
       <div class="stat-block">
-        <div class="stat-block__num">1989</div>
-        <div class="stat-block__divider"></div>
-        <div class="stat-block__label">Regent Properties Founded</div>
+        <div class="stat-block__num">2012</div>
+        <div class="stat-block__divider" aria-hidden="true"></div>
+        <div class="stat-block__label">Reef Real Estate Founded</div>
       </div>
       <div class="stat-block">
         <div class="stat-block__num">13</div>
-        <div class="stat-block__divider"></div>
+        <div class="stat-block__divider" aria-hidden="true"></div>
         <div class="stat-block__label">Curated Tenants</div>
       </div>
     </div>
@@ -655,18 +781,17 @@
   <footer>
     <div class="footer-inner">
       <div class="footer-brand">
-        <span class="footer-logo">La Plaza</span>
-        <span class="footer-sub">La Jolla</span>
+        <img src="images/La%20Plaza%20Logo.svg" alt="La Plaza La Jolla" style="height:70px;width:auto;display:block;margin-bottom:20px;filter:brightness(0) invert(1);" />
         <div class="footer-address">
           7863–7877 Girard Avenue<br>
           La Jolla, CA 92037<br><br>
           <a href="tel:8588763945">(858) 876-3945</a><br>
-          <a href="mailto:laplazapm@regentproperties.com">laplazapm@regentproperties.com</a>
+          <a href="mailto:info@reefrealestate.com">info@reefrealestate.com</a>
         </div>
         <div class="footer-mgmt">
           <span class="footer-mgmt-label">Managed by</span>
           <div class="footer-mgmt-badge">
-            <img src="images/RRES%202024%20Logo.png" alt="Reef Real Estate Services" />
+            <img src="images/reef_logo_hd-Clear-e1578338565714.png" alt="Reef Real Estate Services" />
           </div>
         </div>
       </div>
@@ -683,22 +808,24 @@
       <div>
         <p class="footer-col-title">Connect</p>
         <ul class="footer-links">
-          <li><a href="https://www.facebook.com/LaPlazaLaJolla" target="_blank" rel="noopener">Facebook</a></li>
-          <li><a href="https://twitter.com/laplazalajolla" target="_blank" rel="noopener">Twitter / X</a></li>
-          <li><a href="https://instagram.com/laplazalajolla" target="_blank" rel="noopener">Instagram</a></li>
-          <li><a href="https://www.yelp.com/biz/la-plaza-la-jolla-san-diego" target="_blank" rel="noopener">Yelp</a></li>
+          <li><a href="https://www.facebook.com/LaPlazaLaJolla" target="_blank" rel="noopener" aria-label="Facebook (opens in new tab)">Facebook</a></li>
+          <li><a href="https://twitter.com/laplazalajolla" target="_blank" rel="noopener" aria-label="Twitter (opens in new tab)">Twitter / X</a></li>
+          <li><a href="https://instagram.com/laplazalajolla" target="_blank" rel="noopener" aria-label="Instagram (opens in new tab)">Instagram</a></li>
+          <li><a href="https://www.yelp.com/biz/la-plaza-la-jolla-san-diego" target="_blank" rel="noopener" aria-label="Yelp (opens in new tab)">Yelp</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span class="footer-copy">&copy; 2025 La Plaza La Jolla. Property managed by Regent Properties, LLC.</span>
+      <span class="footer-copy">&copy; 2025 La Plaza La Jolla. Property managed by Reef Real Estate Services.</span>
       <div class="footer-social">
-        <a href="https://www.facebook.com/LaPlazaLaJolla" target="_blank" rel="noopener">FB</a>
-        <a href="https://instagram.com/laplazalajolla" target="_blank" rel="noopener">IG</a>
-        <a href="https://twitter.com/laplazalajolla" target="_blank" rel="noopener">X</a>
+        <a href="https://www.facebook.com/LaPlazaLaJolla" target="_blank" rel="noopener" aria-label="Facebook (opens in new tab)">FB</a>
+        <a href="https://instagram.com/laplazalajolla" target="_blank" rel="noopener" aria-label="Instagram (opens in new tab)">IG</a>
+        <a href="https://twitter.com/laplazalajolla" target="_blank" rel="noopener" aria-label="Twitter (opens in new tab)">X</a>
       </div>
     </div>
   </footer>
+
+  </main>
 
   <script>
     // Scroll-aware nav
@@ -709,6 +836,30 @@
 
     // Trigger once on load
     nav.classList.toggle('scrolled', window.scrollY > 60);
+  </script>
+
+  <script>
+const hamburger = document.getElementById('navHamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+const menuClose  = document.getElementById('menuClose');
+function openMenu() {
+  mobileMenu.classList.add('is-open');
+  hamburger.setAttribute('aria-expanded', 'true');
+  document.body.classList.add('menu-open');
+  menuClose.focus();
+}
+function closeMenu() {
+  mobileMenu.classList.remove('is-open');
+  hamburger.setAttribute('aria-expanded', 'false');
+  document.body.classList.remove('menu-open');
+  hamburger.focus();
+}
+hamburger.addEventListener('click', () => {
+  mobileMenu.classList.contains('is-open') ? closeMenu() : openMenu();
+});
+menuClose.addEventListener('click', closeMenu);
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
   </script>
 
 </body>

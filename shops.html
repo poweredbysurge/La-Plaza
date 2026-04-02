@@ -10,6 +10,22 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
 
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 16px;
+      background: #c4a052;
+      color: #0a0806;
+      padding: 10px 18px;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      z-index: 9999;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: 16px; }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --dark:  #0a0806;
@@ -44,22 +60,9 @@
       -webkit-backdrop-filter: blur(14px);
       padding: 20px 64px;
     }
-    .nav-logo { text-decoration: none; }
-    .nav-logo-main {
-      display: block;
-      font-family: 'Playfair Display', serif;
-      font-size: 20px; font-weight: 600;
-      letter-spacing: 0.16em; text-transform: uppercase;
-      color: #fff; line-height: 1;
-      transition: opacity 0.3s;
-    }
-    .nav-logo:hover .nav-logo-main { opacity: 0.72; }
-    .nav-logo-sub {
-      display: block;
-      font-size: 11px; font-weight: 300;
-      letter-spacing: 0.44em; text-transform: uppercase;
-      color: rgba(255,255,255,0.75); margin-top: 5px;
-    }
+    .nav-logo { text-decoration: none; transition: opacity 0.3s; }
+    .nav-logo:hover { opacity: 0.72; }
+    .nav-logo img { height: 55px; width: auto; display: block; filter: brightness(0) invert(1); }
     .nav-links { list-style: none; display: flex; gap: 44px; }
     .nav-links a {
       position: relative;
@@ -533,20 +536,119 @@
     }
     .footer-mgmt-badge {
       display: inline-flex; align-items: center;
-      background: #fff;
-      padding: 14px 22px;
+      background: transparent;
+      padding: 0;
     }
     .footer-mgmt-badge img { height: 52px; width: auto; display: block; }
+
+    /* ── HAMBURGER / MOBILE MENU ── */
+    .nav-hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      min-width: 44px;
+      min-height: 44px;
+      color: #fff;
+      font-size: 24px;
+      line-height: 1;
+      position: relative;
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(10,8,6,0.97);
+      z-index: 1000;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .mobile-menu.is-open { display: flex; }
+    .mobile-menu a {
+      font-size: 18px;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(240,235,226,0.85);
+      text-decoration: none;
+      padding: 16px 32px;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: #c4a052; }
+    .mobile-menu__close {
+      position: absolute;
+      top: 20px; right: 20px;
+      background: none; border: none;
+      color: rgba(240,235,226,0.7);
+      font-size: 28px; line-height: 1;
+      cursor: pointer;
+      min-width: 44px; min-height: 44px;
+      display: flex; align-items: center; justify-content: center;
+      transition: color 0.2s;
+    }
+    .mobile-menu__close:hover { color: #c4a052; }
+    @media (max-width: 1023px) {
+      .nav-hamburger { display: flex; align-items: center; justify-content: center; }
+      .nav-links { display: none !important; }
+      .nav-logo img { height: 40px; }
+    }
+    body.menu-open { overflow: hidden; }
+
+    /* ── FOCUS VISIBLE ── */
+    :focus-visible { outline: 2px solid #c4a052; outline-offset: 3px; }
+
+    /* ── FOOTER TOUCH TARGETS ── */
+    .footer-links a { padding: 6px 0; display: flex; align-items: center; min-height: 44px; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 767px) {
+      .site-nav { padding: 16px 20px; }
+
+      /* Page hero */
+      .page-hero { min-height: 420px; }
+      .page-hero__content { padding: 0 24px 48px !important; }
+
+      /* Tenant grid → single column */
+      .tenant-section { padding: 40px 20px 60px !important; }
+      .tenant-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+      .tenant-card__img { height: 220px; }
+
+      /* Filter bar */
+      .filter-inner { padding: 14px 20px; gap: 8px; flex-wrap: wrap; }
+      .filter-btn { padding: 8px 14px; font-size: 11px; }
+
+      /* Dining section */
+      .dining-callout { padding: 48px 24px !important; }
+      .dining-grid { grid-template-columns: 1fr !important; gap: 16px; }
+      .dining-callout__header { flex-direction: column; gap: 24px; margin-bottom: 40px; }
+
+      /* Footer */
+      .footer-inner { grid-template-columns: 1fr !important; gap: 40px; padding: 48px 24px !important; }
+      .footer-bottom { flex-direction: column; gap: 16px; padding: 24px; text-align: center; }
+      .footer-social { justify-content: center; }
+    }
+
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .site-nav { padding: 20px 32px; }
+      .tenant-grid { grid-template-columns: repeat(2, 1fr) !important; }
+      .footer-inner { grid-template-columns: 1fr 1fr !important; padding: 60px 40px !important; }
+    }
 
   </style>
 </head>
 <body>
 
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <!-- NAV -->
   <nav class="site-nav" id="siteNav">
     <a href="index.html" class="nav-logo">
-      <span class="nav-logo-main">La Plaza</span>
-      <span class="nav-logo-sub">La Jolla</span>
+      <img src="images/La%20Plaza%20Logo.svg" alt="La Plaza La Jolla" />
     </a>
     <ul class="nav-links">
       <li><a href="about.html">The Plaza</a></li>
@@ -555,8 +657,19 @@
       <li><a href="leasing.html">Leasing</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open navigation" aria-expanded="false" aria-controls="mobileMenu">&#9776;</button>
   </nav>
 
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+    <button class="mobile-menu__close" id="menuClose" aria-label="Close navigation">&#10005;</button>
+    <a href="index.html">Home</a>
+    <a href="about.html">The Plaza</a>
+    <a href="shops.html">Shops &amp; Restaurants</a>
+    <a href="leasing.html">Leasing</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <main id="main-content">
 
   <!-- PAGE HERO -->
   <section class="page-hero">
@@ -610,9 +723,9 @@
           <div class="tenant-card__body">
             <div class="tenant-card__name">Elixir Espresso &amp; Wine Bar</div>
             <div class="tenant-card__suite">Suite 105</div>
-            <a href="https://www.elixirespressobar.com/" target="_blank" rel="noopener" class="tenant-card__link">
+            <a href="https://www.elixirespressobar.com/" target="_blank" rel="noopener" class="tenant-card__link" aria-label="Visit Elixir Espresso &amp; Wine Bar website (opens in new tab)">
               Visit Website
-              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true" focusable="false"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
         </div>
@@ -626,9 +739,9 @@
           <div class="tenant-card__body">
             <div class="tenant-card__name">Bouluci Boutique</div>
             <div class="tenant-card__suite">Suite 106</div>
-            <a href="https://bouluciboutique.com/" target="_blank" rel="noopener" class="tenant-card__link">
+            <a href="https://bouluciboutique.com/" target="_blank" rel="noopener" class="tenant-card__link" aria-label="Visit Bouluci Boutique website (opens in new tab)">
               Visit Website
-              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true" focusable="false"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
         </div>
@@ -642,9 +755,9 @@
           <div class="tenant-card__body">
             <div class="tenant-card__name">ONE|10 SALON</div>
             <div class="tenant-card__suite">Suite 110</div>
-            <a href="https://www.one10salon.com/" target="_blank" rel="noopener" class="tenant-card__link">
+            <a href="https://www.one10salon.com/" target="_blank" rel="noopener" class="tenant-card__link" aria-label="Visit ONE|10 SALON website (opens in new tab)">
               Visit Website
-              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true" focusable="false"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
         </div>
@@ -671,9 +784,9 @@
           <div class="tenant-card__body">
             <div class="tenant-card__name">The Dickinson &amp; Clark Team</div>
             <div class="tenant-card__suite">Suite 201 · Compass</div>
-            <a href="https://www.compass.com/" target="_blank" rel="noopener" class="tenant-card__link">
+            <a href="https://www.compass.com/" target="_blank" rel="noopener" class="tenant-card__link" aria-label="Visit The Dickinson &amp; Clark Team at Compass website (opens in new tab)">
               Visit Website
-              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true" focusable="false"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
         </div>
@@ -687,9 +800,9 @@
           <div class="tenant-card__body">
             <div class="tenant-card__name">StretchLab</div>
             <div class="tenant-card__suite">Suite 202</div>
-            <a href="https://www.stretchlab.com/location/lajolla" target="_blank" rel="noopener" class="tenant-card__link">
+            <a href="https://www.stretchlab.com/location/lajolla" target="_blank" rel="noopener" class="tenant-card__link" aria-label="Visit StretchLab website (opens in new tab)">
               Visit Website
-              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true" focusable="false"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
         </div>
@@ -703,9 +816,9 @@
           <div class="tenant-card__body">
             <div class="tenant-card__name">Teuscher San Diego</div>
             <div class="tenant-card__suite">Suite 204</div>
-            <a href="https://www.teuschersandiego.com/" target="_blank" rel="noopener" class="tenant-card__link">
+            <a href="https://www.teuschersandiego.com/" target="_blank" rel="noopener" class="tenant-card__link" aria-label="Visit Teuscher San Diego website (opens in new tab)">
               Visit Website
-              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true" focusable="false"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
         </div>
@@ -719,9 +832,9 @@
           <div class="tenant-card__body">
             <div class="tenant-card__name">Compass</div>
             <div class="tenant-card__suite">Suites 205 &amp; 207</div>
-            <a href="https://www.compass.com/" target="_blank" rel="noopener" class="tenant-card__link">
+            <a href="https://www.compass.com/" target="_blank" rel="noopener" class="tenant-card__link" aria-label="Visit Compass Suites 205 &amp; 207 website (opens in new tab)">
               Visit Website
-              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true" focusable="false"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
         </div>
@@ -735,9 +848,9 @@
           <div class="tenant-card__body">
             <div class="tenant-card__name">Compass</div>
             <div class="tenant-card__suite">Suites 208 &amp; 210</div>
-            <a href="https://www.compass.com/" target="_blank" rel="noopener" class="tenant-card__link">
+            <a href="https://www.compass.com/" target="_blank" rel="noopener" class="tenant-card__link" aria-label="Visit Compass Suites 208 &amp; 210 website (opens in new tab)">
               Visit Website
-              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true" focusable="false"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
         </div>
@@ -751,9 +864,9 @@
           <div class="tenant-card__body">
             <div class="tenant-card__name">Catania</div>
             <div class="tenant-card__suite">Suite 301</div>
-            <a href="https://www.cataniasd.com/" target="_blank" rel="noopener" class="tenant-card__link">
+            <a href="https://www.cataniasd.com/" target="_blank" rel="noopener" class="tenant-card__link" aria-label="Visit Catania website (opens in new tab)">
               Visit Website
-              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true" focusable="false"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
         </div>
@@ -780,9 +893,9 @@
           <div class="tenant-card__body">
             <div class="tenant-card__name">BlushTan</div>
             <div class="tenant-card__suite">Suite 305</div>
-            <a href="https://www.blushtan.com/lajolla" target="_blank" rel="noopener" class="tenant-card__link">
+            <a href="https://www.blushtan.com/lajolla" target="_blank" rel="noopener" class="tenant-card__link" aria-label="Visit BlushTan website (opens in new tab)">
               Visit Website
-              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true" focusable="false"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
         </div>
@@ -796,9 +909,9 @@
           <div class="tenant-card__body">
             <div class="tenant-card__name">Lucien</div>
             <div class="tenant-card__suite">Suite 307</div>
-            <a href="https://luciensd.com/" target="_blank" rel="noopener" class="tenant-card__link">
+            <a href="https://luciensd.com/" target="_blank" rel="noopener" class="tenant-card__link" aria-label="Visit Lucien website (opens in new tab)">
               Visit Website
-              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true" focusable="false"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
         </div>
@@ -832,9 +945,9 @@
           <div class="dining-card__body">
             <div class="dining-card__name">Elixir Espresso Bar</div>
             <div class="dining-card__suite">Suite 105 · Café</div>
-            <a href="https://www.elixirespressobar.com/" target="_blank" rel="noopener" class="dining-card__link">
+            <a href="https://www.elixirespressobar.com/" target="_blank" rel="noopener" class="dining-card__link" aria-label="Visit Elixir Espresso Bar (opens in new tab)">
               Visit
-              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true" focusable="false"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
         </div>
@@ -845,9 +958,9 @@
           <div class="dining-card__body">
             <div class="dining-card__name">Catania</div>
             <div class="dining-card__suite">Suite 301 · Mediterranean</div>
-            <a href="https://www.cataniasd.com/" target="_blank" rel="noopener" class="dining-card__link">
+            <a href="https://www.cataniasd.com/" target="_blank" rel="noopener" class="dining-card__link" aria-label="Visit Catania (opens in new tab)">
               Visit
-              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true" focusable="false"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
         </div>
@@ -858,9 +971,9 @@
           <div class="dining-card__body">
             <div class="dining-card__name">Lucien</div>
             <div class="dining-card__suite">Suite 307 · Restaurant</div>
-            <a href="https://luciensd.com/" target="_blank" rel="noopener" class="dining-card__link">
+            <a href="https://luciensd.com/" target="_blank" rel="noopener" class="dining-card__link" aria-label="Visit Lucien (opens in new tab)">
               Visit
-              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true" focusable="false"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
         </div>
@@ -874,17 +987,16 @@
   <footer>
     <div class="footer-inner">
       <div>
-        <span class="footer-logo">La Plaza</span>
-        <span class="footer-sub">La Jolla</span>
+        <img src="images/La%20Plaza%20Logo.svg" alt="La Plaza La Jolla" style="height:70px;width:auto;display:block;margin-bottom:20px;filter:brightness(0) invert(1);" />
         <div class="footer-address">
           7863–7877 Girard Avenue<br>La Jolla, CA 92037<br><br>
           <a href="tel:8588763945">(858) 876-3945</a><br>
-          <a href="mailto:laplazapm@regentproperties.com">laplazapm@regentproperties.com</a>
+          <a href="mailto:info@reefrealestate.com">info@reefrealestate.com</a>
         </div>
         <div class="footer-mgmt">
           <span class="footer-mgmt-label">Managed by</span>
           <div class="footer-mgmt-badge">
-            <img src="images/RRES%202024%20Logo.png" alt="Reef Real Estate Services" />
+            <img src="images/reef_logo_hd-Clear-e1578338565714.png" alt="Reef Real Estate Services" />
           </div>
         </div>
       </div>
@@ -901,35 +1013,37 @@
       <div>
         <p class="footer-col-title">Connect</p>
         <ul class="footer-links">
-          <li><a href="https://www.facebook.com/LaPlazaLaJolla" target="_blank" rel="noopener">Facebook</a></li>
-          <li><a href="https://twitter.com/laplazalajolla" target="_blank" rel="noopener">Twitter / X</a></li>
-          <li><a href="https://instagram.com/laplazalajolla" target="_blank" rel="noopener">Instagram</a></li>
-          <li><a href="https://www.yelp.com/biz/la-plaza-la-jolla-san-diego" target="_blank" rel="noopener">Yelp</a></li>
+          <li><a href="https://www.facebook.com/LaPlazaLaJolla" target="_blank" rel="noopener" aria-label="Facebook (opens in new tab)">Facebook</a></li>
+          <li><a href="https://twitter.com/laplazalajolla" target="_blank" rel="noopener" aria-label="Twitter / X (opens in new tab)">Twitter / X</a></li>
+          <li><a href="https://instagram.com/laplazalajolla" target="_blank" rel="noopener" aria-label="Instagram (opens in new tab)">Instagram</a></li>
+          <li><a href="https://www.yelp.com/biz/la-plaza-la-jolla-san-diego" target="_blank" rel="noopener" aria-label="Yelp (opens in new tab)">Yelp</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span class="footer-copy">&copy; 2025 La Plaza La Jolla. Property managed by Regent Properties, LLC.</span>
+      <span class="footer-copy">&copy; 2025 La Plaza La Jolla. Property managed by Reef Real Estate Services.</span>
       <div class="footer-social">
-        <a href="https://www.facebook.com/LaPlazaLaJolla" target="_blank" rel="noopener">FB</a>
-        <a href="https://instagram.com/laplazalajolla" target="_blank" rel="noopener">IG</a>
-        <a href="https://twitter.com/laplazalajolla" target="_blank" rel="noopener">X</a>
+        <a href="https://www.facebook.com/LaPlazaLaJolla" target="_blank" rel="noopener" aria-label="Facebook (opens in new tab)">FB</a>
+        <a href="https://instagram.com/laplazalajolla" target="_blank" rel="noopener" aria-label="Instagram (opens in new tab)">IG</a>
+        <a href="https://twitter.com/laplazalajolla" target="_blank" rel="noopener" aria-label="Twitter / X (opens in new tab)">X</a>
       </div>
     </div>
   </footer>
 
 
+  </main><!-- /#main-content -->
+
   <!-- TENANT MODAL -->
-  <div id="tenantModal" class="tm-overlay" onclick="closeTenantModal(event)">
+  <div id="tenantModal" class="tm-overlay" onclick="closeTenantModal(event)" role="dialog" aria-modal="true" aria-labelledby="tmName" aria-hidden="true">
     <div class="tm-dialog">
       <div class="tm-gallery">
         <img id="tmImg" src="" alt="" />
-        <button class="tm-arrow tm-prev hidden" onclick="shiftTenantImage(-1)">&#8249;</button>
-        <button class="tm-arrow tm-next hidden" onclick="shiftTenantImage(1)">&#8250;</button>
+        <button class="tm-arrow tm-prev hidden" onclick="shiftTenantImage(-1)" aria-label="Previous image"><span aria-hidden="true">&#8249;</span></button>
+        <button class="tm-arrow tm-next hidden" onclick="shiftTenantImage(1)" aria-label="Next image"><span aria-hidden="true">&#8250;</span></button>
         <div class="tm-dots" id="tmDots"></div>
       </div>
       <div class="tm-info">
-        <button class="tm-close" onclick="closeTenantModal()">&#215;</button>
+        <button class="tm-close" onclick="closeTenantModal()" aria-label="Close"><span aria-hidden="true">&#215;</span></button>
         <span class="tm-cat-badge" id="tmCat"></span>
         <h2 class="tm-name" id="tmName"></h2>
         <span class="tm-suite" id="tmSuite"></span>
@@ -938,6 +1052,51 @@
       </div>
     </div>
   </div>
+
+  <!-- HAMBURGER NAV JS -->
+  <script>
+    (function () {
+      const btn       = document.getElementById('navHamburger');
+      const menu      = document.getElementById('mobileMenu');
+      const closeBtn  = document.getElementById('menuClose');
+
+      function openMenu() {
+        menu.classList.add('is-open');
+        btn.setAttribute('aria-expanded', 'true');
+        document.body.classList.add('menu-open');
+        closeBtn.focus();
+      }
+
+      function closeMenu() {
+        menu.classList.remove('is-open');
+        btn.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('menu-open');
+        btn.focus();
+      }
+
+      closeBtn.addEventListener('click', closeMenu);
+
+      btn.addEventListener('click', function () {
+        if (menu.classList.contains('is-open')) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      });
+
+      // Close on Escape key
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && menu.classList.contains('is-open')) {
+          closeMenu();
+        }
+      });
+
+      // Close when a mobile menu link is clicked
+      menu.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', closeMenu);
+      });
+    }());
+  </script>
 
   <script>
     // Scroll-aware nav
@@ -986,20 +1145,27 @@
       document.getElementById('tmDesc').textContent  = card.dataset.desc || '';
 
       const website = card.dataset.website || '';
+      const tenantNameRaw = card.dataset.name || '';
       const actions = document.getElementById('tmActions');
       actions.innerHTML = website
-        ? `<a href="${website}" target="_blank" rel="noopener" class="tm-website">Visit Website <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>`
+        ? `<a href="${website}" target="_blank" rel="noopener" class="tm-website" aria-label="Visit ${tenantNameRaw} website (opens in new tab)">Visit Website <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true" focusable="false"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>`
         : '';
 
       renderTenantImage();
       renderTenantDots();
-      document.getElementById('tenantModal').classList.add('is-open');
+      const modal = document.getElementById('tenantModal');
+      modal.classList.add('is-open');
+      modal.removeAttribute('aria-hidden');
       document.body.style.overflow = 'hidden';
+      // Move focus to the close button
+      setTimeout(() => { modal.querySelector('.tm-close').focus(); }, 50);
     }
 
     function closeTenantModal(e) {
       if (e && e.target !== document.getElementById('tenantModal')) return;
-      document.getElementById('tenantModal').classList.remove('is-open');
+      const modal = document.getElementById('tenantModal');
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
     }
 
@@ -1012,8 +1178,13 @@
     function renderTenantImage() {
       const img = document.getElementById('tmImg');
       const hasMult = tmImages.length > 1;
+      const tenantName = document.getElementById('tmName').textContent || '';
       img.style.opacity = '0';
-      setTimeout(() => { img.src = tmImages[tmIdx] || ''; img.style.opacity = '1'; }, 140);
+      setTimeout(() => {
+        img.src = tmImages[tmIdx] || '';
+        img.alt = tenantName ? tenantName + (hasMult ? ' — photo ' + (tmIdx + 1) + ' of ' + tmImages.length : '') : '';
+        img.style.opacity = '1';
+      }, 140);
       document.querySelector('.tm-prev').classList.toggle('hidden', !hasMult);
       document.querySelector('.tm-next').classList.toggle('hidden', !hasMult);
     }
@@ -1029,7 +1200,7 @@
     document.addEventListener('keydown', e => {
       const modal = document.getElementById('tenantModal');
       if (!modal.classList.contains('is-open')) return;
-      if (e.key === 'Escape')      { modal.classList.remove('is-open'); document.body.style.overflow = ''; }
+      if (e.key === 'Escape')      { modal.classList.remove('is-open'); modal.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; }
       if (e.key === 'ArrowLeft')   shiftTenantImage(-1);
       if (e.key === 'ArrowRight')  shiftTenantImage(1);
     });

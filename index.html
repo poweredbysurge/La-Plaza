@@ -48,31 +48,12 @@
     .nav-logo {
       text-decoration: none;
       pointer-events: all;
-    }
-
-    .nav-logo-main {
-      display: block;
-      font-family: 'Playfair Display', serif;
-      font-size: 20px;
-      font-weight: 600;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: #fff;
-      line-height: 1;
       transition: opacity 0.3s ease;
     }
 
-    .nav-logo:hover .nav-logo-main { opacity: 0.75; }
+    .nav-logo:hover { opacity: 0.75; }
 
-    .nav-logo-sub {
-      display: block;
-      font-size: 11px;
-      font-weight: 300;
-      letter-spacing: 0.44em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.7);
-      margin-top: 5px;
-    }
+    .nav-logo img { height: 55px; width: auto; display: block; filter: brightness(0) invert(1); }
 
     .nav-links {
       list-style: none;
@@ -832,18 +813,151 @@
       text-transform: uppercase;
       color: rgba(240,235,226,0.62);
     }
+    .contact__reef-badge {
+      margin-top: 28px;
+    }
+    .contact__reef-label {
+      font-size: 9px; font-weight: 400; letter-spacing: 0.32em;
+      text-transform: uppercase; color: rgba(240,235,226,0.4);
+      display: block; margin-bottom: 14px;
+    }
+    .contact__reef-badge img { height: 52px; width: auto; display: block; }
+
+    /* ── SKIP LINK ── */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 16px;
+      background: #c4a052;
+      color: #0a0806;
+      padding: 10px 18px;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      z-index: 9999;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: 16px; }
+
+    /* ── HAMBURGER NAV ── */
+    .nav-hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      min-width: 44px;
+      min-height: 44px;
+      color: #fff;
+      font-size: 24px;
+      line-height: 1;
+      z-index: 400;
+      position: relative;
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(10,8,6,0.97);
+      z-index: 1000;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+    }
+    .mobile-menu.is-open { display: flex; }
+    .mobile-menu a {
+      font-size: 18px;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(240,235,226,0.85);
+      text-decoration: none;
+      padding: 16px 32px;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: #c4a052; }
+    .mobile-menu__close {
+      position: absolute;
+      top: 20px; right: 20px;
+      background: none; border: none;
+      color: rgba(240,235,226,0.7);
+      font-size: 28px; line-height: 1;
+      cursor: pointer;
+      min-width: 44px; min-height: 44px;
+      display: flex; align-items: center; justify-content: center;
+      transition: color 0.2s;
+    }
+    .mobile-menu__close:hover { color: #c4a052; }
+    @media (max-width: 1023px) {
+      .nav-hamburger { display: flex; align-items: center; justify-content: center; }
+      .nav-links { display: none !important; }
+      .nav-logo img { height: 40px; }
+    }
+    body.menu-open { overflow: hidden; }
+
+    /* ── MOBILE SLIDE OVERRIDES ── */
+    @media (max-width: 767px) {
+      /* Hero slide */
+      .s-hero__content { padding: 0 24px 48px; }
+      .hero__scroll { display: none; }
+
+      /* About slide */
+      .s-about { flex-direction: column !important; }
+      .s-about__image { max-height: 45vh; flex-shrink: 0; }
+      .s-about__image img { width: 100%; height: 100%; object-fit: cover; }
+      .s-about__body { padding: 40px 28px; overflow-y: auto; }
+      .about__stats { flex-wrap: wrap; gap: 24px; }
+
+      /* Shops slide */
+      .s-shops { flex-direction: column !important; }
+      .s-shops__left { width: 100% !important; padding: 40px 28px; overflow-y: auto; }
+      .s-shops__grid { gap: 2px; }
+
+      /* Dining slide */
+      .s-dining { flex-direction: column !important; overflow-y: auto; }
+      .s-dining__inner { flex-direction: column !important; gap: 32px; padding: 28px !important; }
+      .s-dining__left { width: 100%; }
+      .s-dining__cards { width: 100%; }
+      .dining-card { width: 100%; }
+
+      /* Leasing slide */
+      .s-leasing { flex-direction: column !important; }
+      .s-leasing__image { max-height: 40vh; flex-shrink: 0; }
+      .s-leasing__image img { width: 100%; height: 100%; object-fit: cover; }
+      .s-leasing__body { padding: 40px 28px; overflow-y: auto; }
+      .suites-row { flex-wrap: wrap; gap: 10px; }
+      .leasing-btn { width: 100%; text-align: center; justify-content: center; }
+
+      /* Contact slide */
+      .s-contact__inner { padding: 40px 28px; overflow-y: auto; }
+      .contact__links { flex-direction: column; gap: 12px; align-items: center; }
+      .contact__sep { display: none; }
+      .contact__social { flex-wrap: wrap; gap: 16px; justify-content: center; }
+    }
+
+    /* ── FOCUS STYLES ── */
+    :focus-visible {
+      outline: 2px solid #c4a052;
+      outline-offset: 3px;
+    }
 
   </style>
 </head>
 <body>
 
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <!-- ╔══════════════════════════════════╗
        ║  FIXED NAVIGATION               ║
        ╚══════════════════════════════════╝ -->
   <nav class="site-nav" id="siteNav">
-    <a href="#" class="nav-logo">
-      <span class="nav-logo-main">La Plaza</span>
-      <span class="nav-logo-sub">La Jolla</span>
+    <a href="index.html" class="nav-logo">
+      <img src="images/La%20Plaza%20Logo.svg" alt="La Plaza La Jolla" />
     </a>
     <ul class="nav-links">
       <li><a href="about.html">The Plaza</a></li>
@@ -852,7 +966,20 @@
       <li><a href="leasing.html">Leasing</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open navigation" aria-expanded="false" aria-controls="mobileMenu">&#9776;</button>
   </nav>
+
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+    <button class="mobile-menu__close" id="menuClose" aria-label="Close navigation">&#10005;</button>
+    <a href="index.html">Home</a>
+    <a href="about.html">The Plaza</a>
+    <a href="shops.html">Shops</a>
+    <a href="shops.html#dining">Dining</a>
+    <a href="leasing.html">Leasing</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <main id="main-content">
 
   <!-- Slide Progress Dots -->
   <div class="slide-dots" id="slideDots"></div>
@@ -949,7 +1076,7 @@
           </p>
           <a href="shops.html" class="btn-outline">
             View All Tenants
-            <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true" focusable="false">
               <path d="M1.5 6.5h10M7.5 2.5l4 4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </a>
@@ -964,28 +1091,28 @@
 
         <div class="s-shops__grid">
           <div class="shop-tile">
-            <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80" alt="Luxury boutique" />
+            <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80" alt="Thread + Seed boutique interior, Suite 101" />
             <div class="shop-tile__overlay">
               <div class="shop-tile__name">Thread + Seed</div>
               <div class="shop-tile__suite">Suite 101</div>
             </div>
           </div>
           <div class="shop-tile">
-            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80" alt="Fashion boutique" />
+            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80" alt="Bouluci Boutique fashion, Suite 106" />
             <div class="shop-tile__overlay">
               <div class="shop-tile__name">Bouluci Boutique</div>
               <div class="shop-tile__suite">Suite 106</div>
             </div>
           </div>
           <div class="shop-tile">
-            <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80" alt="Artisan chocolates" />
+            <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80" alt="Teuscher Chocolates artisan confections, Suite 204" />
             <div class="shop-tile__overlay">
               <div class="shop-tile__name">Teuscher Chocolates</div>
               <div class="shop-tile__suite">Suite 204</div>
             </div>
           </div>
           <div class="shop-tile">
-            <img src="https://images.unsplash.com/photo-1573408301185-9519f94816a6?auto=format&fit=crop&w=800&q=80" alt="Fine jewellery" />
+            <img src="https://images.unsplash.com/photo-1573408301185-9519f94816a6?auto=format&fit=crop&w=800&q=80" alt="Brilliant Earth fine jewellery display" />
             <div class="shop-tile__overlay">
               <div class="shop-tile__name">Brilliant Earth</div>
               <div class="shop-tile__suite">Fine Jewellery</div>
@@ -1063,28 +1190,28 @@
 
           <div class="leasing-highlights">
             <div class="lh-row">
-              <svg class="lh-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <svg class="lh-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
                 <circle cx="8" cy="8" r="7" stroke="#b8952a" stroke-width="1.2"/>
                 <path d="M5 8.2l2 2 4-4" stroke="#b8952a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               <span class="lh-text"><strong>7 Million Annual Visitors</strong> to La Jolla Beaches</span>
             </div>
             <div class="lh-row">
-              <svg class="lh-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <svg class="lh-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
                 <circle cx="8" cy="8" r="7" stroke="#b8952a" stroke-width="1.2"/>
                 <path d="M5 8.2l2 2 4-4" stroke="#b8952a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               <span class="lh-text"><strong>Iconic Hard Corner Location</strong> — Wall Street &amp; Girard Avenue</span>
             </div>
             <div class="lh-row">
-              <svg class="lh-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <svg class="lh-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
                 <circle cx="8" cy="8" r="7" stroke="#b8952a" stroke-width="1.2"/>
                 <path d="M5 8.2l2 2 4-4" stroke="#b8952a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               <span class="lh-text"><strong>Panoramic Ocean Views</strong> with outdoor terrace availability</span>
             </div>
             <div class="lh-row">
-              <svg class="lh-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <svg class="lh-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
                 <circle cx="8" cy="8" r="7" stroke="#b8952a" stroke-width="1.2"/>
                 <path d="M5 8.2l2 2 4-4" stroke="#b8952a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
@@ -1099,7 +1226,7 @@
 
           <a href="mailto:reg.kobzi@cbre.com" class="leasing-btn">
             Inquire About Leasing
-            <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true" focusable="false">
               <path d="M1.5 6.5h10M7.5 2.5l4 4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </a>
@@ -1123,18 +1250,22 @@
           <div class="contact__links">
             <a href="tel:8588763945" class="contact__link">858-876-3945</a>
             <div class="contact__sep"></div>
-            <a href="mailto:laplazapm@regentproperties.com" class="contact__link">laplazapm@regentproperties.com</a>
+            <a href="mailto:info@reefrealestate.com" class="contact__link">info@reefrealestate.com</a>
           </div>
 
           <div class="contact__social">
-            <a href="https://www.facebook.com/LaPlazaLaJolla" class="social-link" target="_blank">Facebook</a>
-            <a href="https://instagram.com/laplazalajolla" class="social-link" target="_blank">Instagram</a>
-            <a href="https://twitter.com/laplazalajolla" class="social-link" target="_blank">Twitter</a>
-            <a href="https://www.yelp.com/biz/la-plaza-la-jolla-san-diego" class="social-link" target="_blank">Yelp</a>
+            <a href="https://www.facebook.com/LaPlazaLaJolla" class="social-link" target="_blank" aria-label="Facebook (opens in new tab)">Facebook</a>
+            <a href="https://instagram.com/laplazalajolla" class="social-link" target="_blank" aria-label="Instagram (opens in new tab)">Instagram</a>
+            <a href="https://twitter.com/laplazalajolla" class="social-link" target="_blank" aria-label="Twitter (opens in new tab)">Twitter</a>
+            <a href="https://www.yelp.com/biz/la-plaza-la-jolla-san-diego" class="social-link" target="_blank" aria-label="Yelp (opens in new tab)">Yelp</a>
           </div>
 
           <div class="contact__managed">
-            Managed by Regent Properties &middot; Leasing by CBRE
+            Managed &amp; Leased by Reef Real Estate Services
+          </div>
+          <div class="contact__reef-badge">
+            <span class="contact__reef-label">Managed by</span>
+            <img src="images/reef_logo_hd-Clear-e1578338565714.png" alt="Reef Real Estate Services" />
           </div>
         </div>
 
@@ -1144,6 +1275,7 @@
     </div><!-- /swiper-wrapper -->
   </div><!-- /swiper -->
 
+  </main>
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>
@@ -1155,7 +1287,8 @@
 
     /* ── Build dots ── */
     for (let i = 0; i < SLIDE_COUNT; i++) {
-      const d = document.createElement('div');
+      const d = document.createElement('button');
+      d.type = 'button';
       d.className = 'sdot' + (i === 0 ? ' active' : '');
       d.setAttribute('aria-label', `Go to slide ${i + 1}`);
       d.addEventListener('click', () => swiper.slideTo(i));
@@ -1175,10 +1308,7 @@
       direction:   'vertical',
       speed:       1000,
       effect:      'creative',
-      mousewheel: {
-        enabled:        true,
-        thresholdDelta: 30,
-      },
+      mousewheel:  false,
       keyboard: {
         enabled: true,
       },
@@ -1197,6 +1327,48 @@
         },
       },
     });
+
+    // Custom scroll handler — one gesture = one slide, no multi-skip
+    let scrollLocked = false;
+
+    window.addEventListener('wheel', function(e) {
+      e.preventDefault();
+      if (scrollLocked) return;
+
+      const delta = e.deltaY;
+      if (Math.abs(delta) < 5) return;
+
+      scrollLocked = true;
+      if (delta > 0) {
+        swiper.slideNext();
+      } else {
+        swiper.slidePrev();
+      }
+      setTimeout(() => { scrollLocked = false; }, 1100);
+    }, { passive: false });
+
+    // Hamburger menu
+    const hamburger = document.getElementById('navHamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuClose  = document.getElementById('menuClose');
+    function openMenu() {
+      mobileMenu.classList.add('is-open');
+      hamburger.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('menu-open');
+      menuClose.focus();
+    }
+    function closeMenu() {
+      mobileMenu.classList.remove('is-open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('menu-open');
+      hamburger.focus();
+    }
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.contains('is-open') ? closeMenu() : openMenu();
+    });
+    menuClose.addEventListener('click', closeMenu);
+    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 
   </script>
 
