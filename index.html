@@ -1181,75 +1181,123 @@
       outline-offset: 3px;
     }
 
-    /* ── FOOTER ── */
-    footer { background: var(--dark); border-top: 1px solid rgba(255,255,255,0.06); }
-    .footer-inner {
-      max-width: 1280px; margin: 0 auto;
-      padding: 72px 80px;
-      display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px;
+    /* ── SITE FOOTER (mobile only — Swiper Contact slide handles desktop) ── */
+    .site-footer {
+      background: #0a0806;
+      position: relative;
     }
-    .footer-logo {
+    .site-footer::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(196,160,82,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .sf-inner {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 80px 40px 60px;
+    }
+    .sf-logo {
       font-family: 'Playfair Display', serif;
-      font-size: 18px; font-weight: 600;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--cream); margin-bottom: 8px; display: block;
+      font-size: 40px; font-weight: 400;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: #f0ebe2; margin-bottom: 6px;
     }
-    .footer-sub {
-      font-size: 10.5px; font-weight: 300;
+    .sf-logo-sub {
+      font-size: 12px; font-weight: 300;
       letter-spacing: 0.44em; text-transform: uppercase;
-      color: rgba(240,235,226,0.62); margin-bottom: 28px;
+      color: rgba(240,235,226,0.72); margin-bottom: 48px;
     }
-    .footer-address {
-      font-size: 13px; font-weight: 300; line-height: 1.9;
-      color: rgba(240,235,226,0.72);
+    .sf-gold-line {
+      width: 44px; height: 1px; background: #c4a052;
+      margin: 0 auto 48px;
     }
-    .footer-address a { color: rgba(240,235,226,0.72); text-decoration: none; transition: color 0.25s; }
-    .footer-address a:hover { color: rgba(240,235,226,0.9); }
-    .footer-col-title {
-      font-size: 10.5px; font-weight: 400;
-      letter-spacing: 0.38em; text-transform: uppercase;
-      color: rgba(240,235,226,0.62); margin-bottom: 24px;
+    .sf-address {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px; font-weight: 400; font-style: italic;
+      color: rgba(240,235,226,0.82); margin-bottom: 8px;
     }
-    .footer-links { list-style: none; }
-    .footer-links li { margin-bottom: 13px; }
-    .footer-links a {
-      font-size: 13px; font-weight: 300;
-      color: rgba(240,235,226,0.72); text-decoration: none;
-      letter-spacing: 0.04em; transition: color 0.25s;
+    .sf-city {
+      font-size: 12px; font-weight: 300;
+      letter-spacing: 0.34em; text-transform: uppercase;
+      color: rgba(240,235,226,0.72); margin-bottom: 36px;
     }
-    .footer-links a:hover { color: rgba(240,235,226,0.9); }
-    .footer-bottom {
-      max-width: 1280px; margin: 0 auto;
-      padding: 24px 80px;
-      border-top: 1px solid rgba(255,255,255,0.05);
-      display: flex; justify-content: space-between; align-items: center;
+    .sf-contact-links {
+      display: flex; align-items: center; gap: 36px; margin-bottom: 40px;
     }
-    .footer-copy { font-size: 11.5px; font-weight: 300; color: rgba(240,235,226,0.62); letter-spacing: 0.06em; }
-    .footer-social { display: flex; gap: 24px; }
-    .footer-social a {
-      font-size: 11px; font-weight: 400; letter-spacing: 0.22em;
-      text-transform: uppercase; color: rgba(240,235,226,0.62);
-      text-decoration: none; transition: color 0.25s;
+    .sf-contact-link {
+      font-size: 13px; font-weight: 400;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      text-decoration: none; color: rgba(240,235,226,0.82);
+      transition: color 0.25s;
     }
-    .footer-social a:hover { color: rgba(240,235,226,0.8); }
-    .footer-mgmt { margin-top: 28px; }
-    .footer-mgmt-label { font-size: 9px; font-weight: 400; letter-spacing: 0.32em; text-transform: uppercase; color: rgba(240,235,226,0.4); display: block; margin-bottom: 8px; }
-    .footer-mgmt-badge { display: inline-flex; align-items: center; background: transparent; padding: 0; }
-    .footer-mgmt-badge img { height: 52px; width: auto; display: block; }
-
-    /* Footer mobile overrides — within existing @media (max-width: 767px) context */
+    .sf-contact-link:hover { color: #f0ebe2; }
+    .sf-contact-sep {
+      width: 1px; height: 13px; background: rgba(255,255,255,0.12);
+    }
+    .sf-nav {
+      display: flex; gap: 28px; flex-wrap: wrap;
+      justify-content: center; margin-bottom: 36px;
+    }
+    .sf-nav-link {
+      font-size: 11px; font-weight: 400;
+      letter-spacing: 0.26em; text-transform: uppercase;
+      text-decoration: none; color: rgba(240,235,226,0.5);
+      transition: color 0.25s;
+    }
+    .sf-nav-link:hover { color: rgba(240,235,226,0.85); }
+    .sf-social {
+      display: flex; gap: 26px; margin-bottom: 48px;
+    }
+    .sf-social-link {
+      font-size: 11.5px; font-weight: 400;
+      letter-spacing: 0.24em; text-transform: uppercase;
+      text-decoration: none; color: rgba(240,235,226,0.72);
+      transition: color 0.25s;
+    }
+    .sf-social-link:hover { color: rgba(240,235,226,0.9); }
+    .sf-managed {
+      font-size: 11px; font-weight: 300;
+      letter-spacing: 0.24em; text-transform: uppercase;
+      color: rgba(240,235,226,0.62);
+    }
+    .sf-reef { margin-top: 28px; }
+    .sf-reef-label {
+      font-size: 9px; font-weight: 400; letter-spacing: 0.32em;
+      text-transform: uppercase; color: rgba(240,235,226,0.4);
+      display: block; margin-bottom: 14px;
+    }
+    .sf-reef img { height: 52px; width: auto; display: block; margin: 0 auto; }
+    .sf-bottom {
+      position: relative; z-index: 2;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      text-align: center; padding: 24px 40px;
+    }
+    .sf-copy {
+      font-size: 11.5px; font-weight: 300;
+      color: rgba(240,235,226,0.4); letter-spacing: 0.06em;
+    }
     @media (max-width: 767px) {
-      footer { display: block; scroll-snap-align: none; }
-      .footer-inner { grid-template-columns: 1fr !important; gap: 40px; padding: 48px 24px !important; }
-      .footer-bottom { flex-direction: column; gap: 16px; padding: 24px; text-align: center; }
-      .footer-social { justify-content: center; }
-    }
-    @media (min-width: 768px) and (max-width: 1023px) {
-      .footer-inner { grid-template-columns: 1fr 1fr !important; padding: 60px 40px !important; }
+      .site-footer { display: block; scroll-snap-align: none; }
+      .sf-inner { padding: 56px 24px 40px; }
+      .sf-logo { font-size: 30px; }
+      .sf-logo-sub { margin-bottom: 28px; }
+      .sf-gold-line { margin-bottom: 28px; }
+      .sf-address { font-size: 20px; }
+      .sf-contact-links { flex-direction: column; gap: 12px; align-items: center; }
+      .sf-contact-sep { display: none; }
+      .sf-social { flex-wrap: wrap; gap: 14px; justify-content: center; }
+      .sf-nav { gap: 16px; }
+      .sf-bottom { padding: 20px 24px; }
     }
     /* On desktop the Contact slide handles this role — hide footer */
     @media (min-width: 768px) {
-      footer { display: none; }
+      .site-footer { display: none; }
     }
 
   </style>
@@ -1612,49 +1660,39 @@
   </main>
 
   <!-- FOOTER -->
-  <footer>
-    <div class="footer-inner">
-      <div>
-        <img src="images/La%20Plaza%20Logo.svg" alt="La Plaza La Jolla" style="height:70px;width:auto;display:block;margin-bottom:20px;filter:brightness(0) invert(1);" />
-        <div class="footer-address">
-          7863–7877 Girard Avenue<br>La Jolla, CA 92037<br><br>
-          <a href="tel:8588763945">(858) 876-3945</a><br>
-          <a href="mailto:info@reefrealestate.com">info@reefrealestate.com</a>
-        </div>
-        <div class="footer-mgmt">
-          <span class="footer-mgmt-label">Managed by</span>
-          <div class="footer-mgmt-badge">
-            <img src="images/reef_logo_hd-Clear-e1578338565714.png" alt="Reef Real Estate Services" />
-          </div>
-        </div>
+  <footer class="site-footer">
+    <div class="sf-inner">
+      <div class="sf-logo">La Plaza</div>
+      <div class="sf-logo-sub">La Jolla &middot; California</div>
+      <div class="sf-gold-line"></div>
+      <div class="sf-address">7863–7877 Girard Avenue</div>
+      <div class="sf-city">La Jolla, CA 92037 &middot; United States</div>
+      <div class="sf-contact-links">
+        <a href="tel:8588763945" class="sf-contact-link">858-876-3945</a>
+        <div class="sf-contact-sep"></div>
+        <a href="mailto:info@reefrealestate.com" class="sf-contact-link">info@reefrealestate.com</a>
       </div>
-      <div>
-        <p class="footer-col-title">Explore</p>
-        <ul class="footer-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="shops.html">Shops &amp; Restaurants</a></li>
-          <li><a href="leasing.html">Leasing</a></li>
-          <li><a href="contact.html">Contact Us</a></li>
-        </ul>
+      <nav class="sf-nav" aria-label="Site map">
+        <a href="index.html" class="sf-nav-link">Home</a>
+        <a href="about.html" class="sf-nav-link">About</a>
+        <a href="shops.html" class="sf-nav-link">Shops</a>
+        <a href="leasing.html" class="sf-nav-link">Leasing</a>
+        <a href="contact.html" class="sf-nav-link">Contact</a>
+      </nav>
+      <div class="sf-social">
+        <a href="https://www.facebook.com/LaPlazaLaJolla" class="sf-social-link" target="_blank" rel="noopener" aria-label="Facebook (opens in new tab)">Facebook</a>
+        <a href="https://instagram.com/laplazalajolla" class="sf-social-link" target="_blank" rel="noopener" aria-label="Instagram (opens in new tab)">Instagram</a>
+        <a href="https://twitter.com/laplazalajolla" class="sf-social-link" target="_blank" rel="noopener" aria-label="Twitter (opens in new tab)">Twitter</a>
+        <a href="https://www.yelp.com/biz/la-plaza-la-jolla-san-diego" class="sf-social-link" target="_blank" rel="noopener" aria-label="Yelp (opens in new tab)">Yelp</a>
       </div>
-      <div>
-        <p class="footer-col-title">Connect</p>
-        <ul class="footer-links">
-          <li><a href="https://www.facebook.com/LaPlazaLaJolla" target="_blank" rel="noopener" aria-label="Facebook (opens in new tab)">Facebook</a></li>
-          <li><a href="https://twitter.com/laplazalajolla" target="_blank" rel="noopener" aria-label="Twitter / X (opens in new tab)">Twitter / X</a></li>
-          <li><a href="https://instagram.com/laplazalajolla" target="_blank" rel="noopener" aria-label="Instagram (opens in new tab)">Instagram</a></li>
-          <li><a href="https://www.yelp.com/biz/la-plaza-la-jolla-san-diego" target="_blank" rel="noopener" aria-label="Yelp (opens in new tab)">Yelp</a></li>
-        </ul>
+      <div class="sf-managed">Managed &amp; Leased by Reef Real Estate Services</div>
+      <div class="sf-reef">
+        <span class="sf-reef-label">Managed by</span>
+        <img src="images/reef_logo_hd-Clear-e1578338565714.png" alt="Reef Real Estate Services" />
       </div>
     </div>
-    <div class="footer-bottom">
-      <span class="footer-copy">&copy; 2025 La Plaza La Jolla. Property managed by Reef Real Estate Services.</span>
-      <div class="footer-social">
-        <a href="https://www.facebook.com/LaPlazaLaJolla" target="_blank" rel="noopener" aria-label="Facebook (opens in new tab)">FB</a>
-        <a href="https://instagram.com/laplazalajolla" target="_blank" rel="noopener" aria-label="Instagram (opens in new tab)">IG</a>
-        <a href="https://twitter.com/laplazalajolla" target="_blank" rel="noopener" aria-label="Twitter / X (opens in new tab)">X</a>
-      </div>
+    <div class="sf-bottom">
+      <span class="sf-copy">&copy; 2025 La Plaza La Jolla. Property managed by Reef Real Estate Services.</span>
     </div>
   </footer>
 
