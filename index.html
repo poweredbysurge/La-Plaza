@@ -1184,11 +1184,8 @@
       outline-offset: 3px;
     }
 
-    /* ── SITE FOOTER (mobile only — Swiper Contact slide handles desktop) ── */
-    .site-footer {
-      background: #0a0806;
-      position: relative;
-    }
+    /* ── SITE FOOTER — hidden on all breakpoints; Contact slide handles this role ── */
+    .site-footer { display: none !important; }
     .site-footer::before {
       content: '';
       position: absolute;
@@ -1284,23 +1281,6 @@
     .sf-copy {
       font-size: 11.5px; font-weight: 300;
       color: rgba(240,235,226,0.4); letter-spacing: 0.06em;
-    }
-    @media (max-width: 767px) {
-      .site-footer { display: block; scroll-snap-align: none; }
-      .sf-inner { padding: 56px 24px 40px; }
-      .sf-logo { font-size: 30px; }
-      .sf-logo-sub { margin-bottom: 28px; }
-      .sf-gold-line { margin-bottom: 28px; }
-      .sf-address { font-size: 20px; }
-      .sf-contact-links { flex-direction: column; gap: 12px; align-items: center; }
-      .sf-contact-sep { display: none; }
-      .sf-social { flex-wrap: wrap; gap: 14px; justify-content: center; }
-      .sf-nav { gap: 16px; }
-      .sf-bottom { padding: 20px 24px; }
-    }
-    /* On desktop the Contact slide handles this role — hide footer */
-    @media (min-width: 768px) {
-      .site-footer { display: none; }
     }
 
   </style>
