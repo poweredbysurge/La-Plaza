@@ -582,6 +582,54 @@
     .tm-website:hover { background: var(--gold); }
     .tm-website svg { transition: transform 0.25s; }
     .tm-website:hover svg { transform: translateX(3px); }
+
+    .tm-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .tm-meta-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(26,20,16,0.70);
+      line-height: 1.5;
+    }
+    .tm-meta-icon {
+      flex-shrink: 0;
+      width: 16px;
+      margin-top: 2px;
+      opacity: 0.55;
+    }
+    .tm-address {
+      font-size: 12px;
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      color: rgba(26,20,16,0.55);
+      margin-bottom: 16px;
+    }
+    .tm-social {
+      display: flex;
+      gap: 14px;
+      margin-top: 16px;
+    }
+    .tm-social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: rgba(26,20,16,0.60);
+      transition: color 0.22s;
+    }
+    .tm-social-link:hover { color: var(--gold); }
+
     @media (max-width: 700px) {
       .tm-overlay { padding: 0; align-items: flex-end; }
       .tm-dialog { flex-direction: column; height: 92vh; max-width: 100%; border-radius: 0; }
@@ -746,7 +794,7 @@
       <button class="filter-btn" data-filter="shop" onclick="filterTenants('shop')">Shop</button>
       <button class="filter-btn" data-filter="dine" onclick="filterTenants('dine')">Dine</button>
       <button class="filter-btn" data-filter="services" onclick="filterTenants('services')">Services</button>
-      <span class="filter-count" id="filterCount">14 locations</span>
+      <span class="filter-count" id="filterCount">13 locations</span>
     </div>
   </div>
 
@@ -757,7 +805,7 @@
       <div class="tenant-grid" id="tenantGrid">
 
         <!-- Thread + Seed -->
-        <div class="tenant-card" data-cat="shop" onclick="openTenant(event, this)" data-name="Thread + Seed" data-suite="Suite 101" data-cat-label="Shop" data-desc="A curated boutique offering thoughtfully crafted clothing and accessories rooted in sustainable style. Thread + Seed brings together artisan-made pieces and conscious fashion for the modern La Jolla lifestyle." data-images="images/Logos%20and%20TT%20Photos/thread%20and%20seed%20IMG_2230.jpeg">
+        <div class="tenant-card" data-cat="shop" onclick="openTenant(event, this)" data-name="Thread + Seed" data-suite="Suite 101" data-cat-label="Shop" data-desc="A curated boutique offering thoughtfully crafted clothing and accessories rooted in sustainable style. Thread + Seed brings together artisan-made pieces and conscious fashion for the modern La Jolla lifestyle." data-images="images/Logos%20and%20TT%20Photos/thread%20and%20seed%20IMG_2230.jpeg" data-address="7863 Girard Avenue, Suite 101, La Jolla, CA 92037" data-phone="619-538-0623" data-hours="10am – 8pm Daily" data-instagram="https://www.instagram.com/threadandseed" data-facebook="https://www.facebook.com/threadandseed/">
           <div class="tenant-card__img">
             <img src="images/Logos%20and%20TT%20Photos/thread%20and%20seed%20IMG_2230.jpeg" alt="Thread + Seed" />
             <span class="tenant-card__cat">Shop</span>
@@ -770,7 +818,7 @@
         </div>
 
         <!-- Elixir Espresso & Wine Bar -->
-        <div class="tenant-card" data-cat="dine" onclick="openTenant(event, this)" data-name="Elixir Espresso &amp; Wine Bar" data-suite="Suite 105" data-cat-label="Dine" data-desc="La Jolla's beloved neighborhood café and wine bar. From expertly pulled espresso at dawn to carefully curated wines by evening, Elixir is your all-day social anchor at La Plaza." data-images="https://cdn.b12.io/client_media/Rfc3NbPx/688ec0dc-bd66-11eb-99f1-0242ac110002-jpg-hero_image.jpeg" data-website="https://www.elixirespressobar.com/">
+        <div class="tenant-card" data-cat="dine" onclick="openTenant(event, this)" data-name="Elixir Espresso &amp; Wine Bar" data-suite="Suite 105" data-cat-label="Dine" data-desc="La Jolla's beloved neighborhood café and wine bar. From expertly pulled espresso at dawn to carefully curated wines by evening, Elixir is your all-day social anchor at La Plaza." data-images="https://cdn.b12.io/client_media/Rfc3NbPx/688ec0dc-bd66-11eb-99f1-0242ac110002-jpg-hero_image.jpeg" data-website="https://www.elixirespressobar.com/" data-address="7863 Girard Avenue, Suite 105, La Jolla, CA 92037" data-phone="858-291-8278" data-hours="Mon – Sun: 7am – 6pm" data-instagram="https://www.instagram.com/elixirespressobar" data-facebook="https://www.facebook.com/elixirespressobar">
           <div class="tenant-card__img">
             <img src="https://cdn.b12.io/client_media/Rfc3NbPx/688ec0dc-bd66-11eb-99f1-0242ac110002-jpg-hero_image.jpeg" alt="Elixir Espresso &amp; Wine Bar" />
             <span class="tenant-card__cat">Dine</span>
@@ -785,24 +833,8 @@
           </div>
         </div>
 
-        <!-- Bouluci Boutique -->
-        <div class="tenant-card" data-cat="shop" onclick="openTenant(event, this)" data-name="Bouluci Boutique" data-suite="Suite 106" data-cat-label="Shop" data-desc="A luxury women's boutique offering an exquisite selection of designer clothing, accessories, and fine jewelry. Bouluci curates a distinctive collection for the discerning La Jolla shopper." data-images="https://cdn.b12.io/client_media/Rfc3NbPx/77b6927a-5d9f-11ee-b9ef-0242ac110002-png-hero_image.png" data-website="https://bouluciboutique.com/">
-          <div class="tenant-card__img">
-            <img src="https://cdn.b12.io/client_media/Rfc3NbPx/77b6927a-5d9f-11ee-b9ef-0242ac110002-png-hero_image.png" alt="Bouluci Boutique" />
-            <span class="tenant-card__cat">Shop</span>
-          </div>
-          <div class="tenant-card__body">
-            <div class="tenant-card__name">Bouluci Boutique</div>
-            <div class="tenant-card__suite">Suite 106</div>
-            <a href="https://bouluciboutique.com/" target="_blank" rel="noopener" class="tenant-card__link" aria-label="Visit Bouluci Boutique website (opens in new tab)">
-              Visit Website
-              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true" focusable="false"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
-        </div>
-
         <!-- ONE|10 SALON -->
-        <div class="tenant-card" data-cat="play" onclick="openTenant(event, this)" data-name="ONE|10 SALON" data-suite="Suite 110" data-cat-label="Salon" data-desc="A premier full-service salon offering cutting-edge hair styling, color, and treatments. ONE|10 combines artistry with personalized care to deliver exceptional results in an elevated, welcoming space." data-images="https://cdn.b12.io/client_media/Rfc3NbPx/5acac3d0-bd69-11eb-bc3a-0242ac110002-jpg-hero_image.jpeg" data-website="https://www.one10salon.com/">
+        <div class="tenant-card" data-cat="play" onclick="openTenant(event, this)" data-name="ONE|10 SALON" data-suite="Suite 110" data-cat-label="Salon" data-desc="A premier full-service salon offering cutting-edge hair styling, color, and treatments. ONE|10 combines artistry with personalized care to deliver exceptional results in an elevated, welcoming space." data-images="https://cdn.b12.io/client_media/Rfc3NbPx/5acac3d0-bd69-11eb-bc3a-0242ac110002-jpg-hero_image.jpeg" data-website="https://www.one10salon.com/" data-address="7863 Girard Avenue, Suite 110, La Jolla, CA 92037" data-phone="By Appointment" data-hours="By Appointment" data-instagram="https://www.instagram.com/one10salon/">
           <div class="tenant-card__img">
             <img src="https://cdn.b12.io/client_media/Rfc3NbPx/5acac3d0-bd69-11eb-bc3a-0242ac110002-jpg-hero_image.jpeg" alt="ONE|10 SALON" />
             <span class="tenant-card__cat">Salon</span>
@@ -818,7 +850,7 @@
         </div>
 
         <!-- Hummingbird Luxury Jewelry -->
-        <div class="tenant-card" data-cat="shop" onclick="openTenant(event, this)" data-name="Hummingbird Luxury Jewelry" data-suite="Suite 112" data-cat-label="Shop" data-desc="An intimate fine jewelry studio specializing in handcrafted pieces and bespoke designs. Hummingbird brings together rare gemstones and master craftsmanship for jewelry that tells your story." data-images="https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&w=900&q=80">
+        <div class="tenant-card" data-cat="shop" onclick="openTenant(event, this)" data-name="Hummingbird Luxury Jewelry" data-suite="Suite 112" data-cat-label="Shop" data-desc="An intimate fine jewelry studio specializing in handcrafted pieces and bespoke designs. Hummingbird brings together rare gemstones and master craftsmanship for jewelry that tells your story." data-images="https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&w=900&q=80" data-website="https://www.hummingbirdpiercing.com/" data-address="7863 Girard Avenue, Suite 112, La Jolla, CA 92037" data-phone="858-291-8278" data-hours="Mon–Tue: 11am–6pm · Wed: Closed · Thu–Sun: 11am–6pm" data-instagram="https://www.instagram.com/hummingbirdlajolla/">
           <div class="tenant-card__img">
             <img src="https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&w=600&q=80" alt="Hummingbird Luxury Jewelry" />
             <span class="tenant-card__cat">Shop</span>
@@ -826,12 +858,28 @@
           <div class="tenant-card__body">
             <div class="tenant-card__name">Hummingbird Luxury Jewelry</div>
             <div class="tenant-card__suite">Suite 112</div>
+            <a href="https://www.hummingbirdpiercing.com/" target="_blank" rel="noopener" class="tenant-card__link" aria-label="Visit Hummingbird Luxury Jewelry website (opens in new tab)">
+              Visit Website
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true" focusable="false"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Thread + Seed Headquarters -->
+        <div class="tenant-card" data-cat="shop" onclick="openTenant(event, this)" data-name="Thread + Seed Headquarters" data-suite="Suite 114" data-cat-label="Shop" data-desc="The flagship headquarters of Thread + Seed, La Jolla's beloved sustainable boutique. A larger space housing the full Thread + Seed collection of artisan-made clothing and accessories rooted in conscious fashion." data-images="images/Logos%20and%20TT%20Photos/thread%20and%20seed%20IMG_2230.jpeg" data-address="7863 Girard Avenue, Suite 114, La Jolla, CA 92037" data-phone="619-538-0623" data-hours="10am – 8pm Daily" data-instagram="https://www.instagram.com/threadandseed" data-facebook="https://www.facebook.com/threadandseed/">
+          <div class="tenant-card__img">
+            <img src="images/Logos%20and%20TT%20Photos/thread%20and%20seed%20IMG_2230.jpeg" alt="Thread + Seed Headquarters" />
+            <span class="tenant-card__cat">Shop</span>
+          </div>
+          <div class="tenant-card__body">
+            <div class="tenant-card__name">Thread + Seed Headquarters</div>
+            <div class="tenant-card__suite">Suite 114</div>
             <span class="tenant-card__nolink">In-store only</span>
           </div>
         </div>
 
         <!-- The Dickinson & Clark Team -->
-        <div class="tenant-card" data-cat="services" onclick="openTenant(event, this)" data-name="The Dickinson &amp; Clark Team" data-suite="Suite 201 · Compass" data-cat-label="Services" data-desc="La Jolla's trusted real estate specialists. The Dickinson & Clark Team at Compass brings decades of local expertise to help clients buy, sell, and invest in San Diego's most coveted coastal properties." data-images="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=900&q=80" data-website="https://www.compass.com/">
+        <div class="tenant-card" data-cat="services" onclick="openTenant(event, this)" data-name="The Dickinson &amp; Clark Team" data-suite="Suite 201 · Compass" data-cat-label="Services" data-desc="La Jolla's trusted real estate specialists. The Dickinson & Clark Team at Compass brings decades of local expertise to help clients buy, sell, and invest in San Diego's most coveted coastal properties." data-images="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=900&q=80" data-website="https://dickinsonclarkteam.com/" data-address="7863 Girard Avenue, Suite 201, La Jolla, CA 92037" data-phone="858-822-9699" data-hours="9am – 5pm" data-instagram="https://www.instagram.com/dickinsonclarkteam/" data-facebook="https://www.facebook.com/DickinsonClarkTeam">
           <div class="tenant-card__img">
             <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=600&q=80" alt="The Dickinson &amp; Clark Team" />
             <span class="tenant-card__cat">Services</span>
@@ -839,23 +887,7 @@
           <div class="tenant-card__body">
             <div class="tenant-card__name">The Dickinson &amp; Clark Team</div>
             <div class="tenant-card__suite">Suite 201 · Compass</div>
-            <a href="https://www.compass.com/" target="_blank" rel="noopener" class="tenant-card__link" aria-label="Visit The Dickinson &amp; Clark Team at Compass website (opens in new tab)">
-              Visit Website
-              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true" focusable="false"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- StretchLab -->
-        <div class="tenant-card" data-cat="play" onclick="openTenant(event, this)" data-name="StretchLab" data-suite="Suite 202" data-cat-label="Fitness" data-desc="Personalized assisted stretching sessions designed to improve flexibility, reduce pain, and enhance performance. StretchLab's expert Flexologists create customized programs for every body and fitness level." data-images="https://cdn.b12.io/client_media/Rfc3NbPx/c04171be-d2ab-11ee-bdc8-0242ac110002-png-hero_image.png" data-website="https://www.stretchlab.com/location/lajolla">
-          <div class="tenant-card__img">
-            <img src="https://cdn.b12.io/client_media/Rfc3NbPx/c04171be-d2ab-11ee-bdc8-0242ac110002-png-hero_image.png" alt="StretchLab" />
-            <span class="tenant-card__cat">Fitness</span>
-          </div>
-          <div class="tenant-card__body">
-            <div class="tenant-card__name">StretchLab</div>
-            <div class="tenant-card__suite">Suite 202</div>
-            <a href="https://www.stretchlab.com/location/lajolla" target="_blank" rel="noopener" class="tenant-card__link" aria-label="Visit StretchLab website (opens in new tab)">
+            <a href="https://dickinsonclarkteam.com/" target="_blank" rel="noopener" class="tenant-card__link" aria-label="Visit The Dickinson &amp; Clark Team website (opens in new tab)">
               Visit Website
               <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true" focusable="false"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
@@ -863,7 +895,7 @@
         </div>
 
         <!-- Teuscher San Diego -->
-        <div class="tenant-card" data-cat="shop" onclick="openTenant(event, this)" data-name="Teuscher San Diego" data-suite="Suite 204" data-cat-label="Shop · Dine" data-desc="A legendary Swiss chocolatier crafting world-renowned confections using the finest ingredients imported directly from Switzerland. Experience handmade champagne truffles and seasonal creations at La Plaza." data-images="https://cdn.b12.io/client_media/Rfc3NbPx/a40e9128-bd66-11eb-9188-0242ac110003-jpg-regular_image.jpeg" data-website="https://www.teuschersandiego.com/">
+        <div class="tenant-card" data-cat="shop" onclick="openTenant(event, this)" data-name="Teuscher San Diego" data-suite="Suite 204" data-cat-label="Shop · Dine" data-desc="A legendary Swiss chocolatier crafting world-renowned confections using the finest ingredients imported directly from Switzerland. Experience handmade champagne truffles and seasonal creations at La Plaza." data-images="https://cdn.b12.io/client_media/Rfc3NbPx/a40e9128-bd66-11eb-9188-0242ac110003-jpg-regular_image.jpeg" data-website="https://www.teuschersandiego.com/" data-address="7863 Girard Avenue, Suite 204, La Jolla, CA 92037" data-phone="858-230-6337" data-hours="Mon–Fri: 12pm–6pm · Sat: 11am–6pm · Sun: 12pm–5:30pm" data-instagram="https://www.instagram.com/teuschersandiego">
           <div class="tenant-card__img">
             <img src="https://cdn.b12.io/client_media/Rfc3NbPx/a40e9128-bd66-11eb-9188-0242ac110003-jpg-regular_image.jpeg" alt="Teuscher San Diego" />
             <span class="tenant-card__cat">Shop · Dine</span>
@@ -879,7 +911,7 @@
         </div>
 
         <!-- Compass 205 & 207 -->
-        <div class="tenant-card" data-cat="services" onclick="openTenant(event, this)" data-name="Compass" data-suite="Suites 205 &amp; 207" data-cat-label="Services" data-desc="A technology-driven real estate brokerage dedicated to making the homebuying and selling process seamless. The Compass team at La Plaza serves buyers and sellers across La Jolla and greater San Diego." data-images="https://cdn.b12.io/client_media/Rfc3NbPx/077a158e-bd67-11eb-9188-0242ac110003-jpg-hero_image.jpeg" data-website="https://www.compass.com/">
+        <div class="tenant-card" data-cat="services" onclick="openTenant(event, this)" data-name="Compass" data-suite="Suites 205 &amp; 207" data-cat-label="Services" data-desc="A technology-driven real estate brokerage dedicated to making the homebuying and selling process seamless. The Compass team at La Plaza serves buyers and sellers across La Jolla and greater San Diego." data-images="https://cdn.b12.io/client_media/Rfc3NbPx/077a158e-bd67-11eb-9188-0242ac110003-jpg-hero_image.jpeg" data-website="https://www.compass.com/" data-address="7863 Girard Avenue, Suites 205 &amp; 207, La Jolla, CA 92037" data-phone="858-277-3325" data-hours="Mon–Fri: 9am–5pm" data-instagram="https://www.instagram.com/sandiegocompass/">
           <div class="tenant-card__img">
             <img src="https://cdn.b12.io/client_media/Rfc3NbPx/077a158e-bd67-11eb-9188-0242ac110003-jpg-hero_image.jpeg" alt="Compass Real Estate" />
             <span class="tenant-card__cat">Services</span>
@@ -895,7 +927,7 @@
         </div>
 
         <!-- Compass 208 & 210 -->
-        <div class="tenant-card" data-cat="services" onclick="openTenant(event, this)" data-name="Compass" data-suite="Suites 208 &amp; 210" data-cat-label="Services" data-desc="A technology-driven real estate brokerage dedicated to making the homebuying and selling process seamless. The Compass team at La Plaza serves buyers and sellers across La Jolla and greater San Diego." data-images="https://cdn.b12.io/client_media/Rfc3NbPx/077a158e-bd67-11eb-9188-0242ac110003-jpg-hero_image.jpeg" data-website="https://www.compass.com/">
+        <div class="tenant-card" data-cat="services" onclick="openTenant(event, this)" data-name="Compass" data-suite="Suites 208 &amp; 210" data-cat-label="Services" data-desc="A technology-driven real estate brokerage dedicated to making the homebuying and selling process seamless. The Compass team at La Plaza serves buyers and sellers across La Jolla and greater San Diego." data-images="https://cdn.b12.io/client_media/Rfc3NbPx/077a158e-bd67-11eb-9188-0242ac110003-jpg-hero_image.jpeg" data-website="https://www.compass.com/" data-address="7863 Girard Avenue, Suites 208 &amp; 210, La Jolla, CA 92037" data-phone="858-277-3325" data-hours="Mon–Fri: 9am–5pm" data-instagram="https://www.instagram.com/sandiegocompass/">
           <div class="tenant-card__img">
             <img src="https://cdn.b12.io/client_media/Rfc3NbPx/077a158e-bd67-11eb-9188-0242ac110003-jpg-hero_image.jpeg" alt="Compass Real Estate" />
             <span class="tenant-card__cat">Services</span>
@@ -911,7 +943,7 @@
         </div>
 
         <!-- Catania -->
-        <div class="tenant-card" data-cat="dine" onclick="openTenant(event, this)" data-name="Catania" data-suite="Suite 301" data-cat-label="Dine" data-desc="An acclaimed Mediterranean restaurant set atop La Plaza with sweeping Pacific Ocean views. Catania celebrates the flavors of coastal Italy and Spain with fresh, locally sourced ingredients and an award-winning wine program." data-images="images/Logos%20and%20TT%20Photos/catania%20_K9A5725-2.jpg|images/Logos%20and%20TT%20Photos/catania%20_T9A0183.jpg|images/Logos%20and%20TT%20Photos/catania%20_K9A5739.jpg|images/Logos%20and%20TT%20Photos/catania%20_K9A5824.jpg|images/Logos%20and%20TT%20Photos/catania%20_K9A5940.jpg|images/Logos%20and%20TT%20Photos/catania%20_K9A6130.jpg|images/Logos%20and%20TT%20Photos/catania%20_K9A7263.jpg" data-website="https://www.cataniasd.com/">
+        <div class="tenant-card" data-cat="dine" onclick="openTenant(event, this)" data-name="Catania" data-suite="Suite 301" data-cat-label="Dine" data-desc="An acclaimed Mediterranean restaurant set atop La Plaza with sweeping Pacific Ocean views. Catania celebrates the flavors of coastal Italy and Spain with fresh, locally sourced ingredients and an award-winning wine program." data-images="images/Logos%20and%20TT%20Photos/catania%20_K9A5725-2.jpg|images/Logos%20and%20TT%20Photos/catania%20_T9A0183.jpg|images/Logos%20and%20TT%20Photos/catania%20_K9A5739.jpg|images/Logos%20and%20TT%20Photos/catania%20_K9A5824.jpg|images/Logos%20and%20TT%20Photos/catania%20_K9A5940.jpg|images/Logos%20and%20TT%20Photos/catania%20_K9A6130.jpg|images/Logos%20and%20TT%20Photos/catania%20_K9A7263.jpg" data-website="https://www.cataniasd.com/" data-address="7863 Girard Avenue, Suite 301, La Jolla, CA 92037" data-phone="858-551-5105" data-hours="Sun–Thu: 4–8:30pm · Fri–Sat: 4–9pm · Weekend Lunch: 11:30am" data-instagram="https://www.instagram.com/cataniasd/" data-facebook="https://www.facebook.com/cataniasd/">
           <div class="tenant-card__img">
             <img src="images/Logos%20and%20TT%20Photos/catania%20_K9A5725-2.jpg" alt="Catania" />
             <span class="tenant-card__cat">Dine</span>
@@ -927,20 +959,23 @@
         </div>
 
         <!-- Cullen Jewellery -->
-        <div class="tenant-card" data-cat="shop" onclick="openTenant(event, this)" data-name="Cullen Jewellery" data-suite="Suite 303 · Opening Soon" data-cat-label="Shop" data-desc="Coming soon to La Plaza La Jolla — Cullen Jewellery brings an internationally celebrated collection of fine jewelry and engagement rings, known for timeless designs and impeccable craftsmanship." data-images="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=900&q=80">
+        <div class="tenant-card" data-cat="shop" onclick="openTenant(event, this)" data-name="Cullen Jewellery" data-suite="Suite 303" data-cat-label="Shop" data-desc="An internationally celebrated collection of fine jewelry and engagement rings at La Plaza La Jolla. Cullen Jewellery is known for timeless designs and impeccable craftsmanship." data-images="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=900&q=80" data-website="https://cullenjewellery.com/coming-soon/san-diego" data-address="7863 Girard Avenue, Suite 303, La Jolla, CA 92037" data-phone="Coming Soon" data-hours="Coming Soon" data-instagram="https://www.instagram.com/cullenjewellery/" data-facebook="https://www.facebook.com/cullenjewellery">
           <div class="tenant-card__img">
             <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600&q=80" alt="Cullen Jewellery" />
             <span class="tenant-card__cat">Shop</span>
           </div>
           <div class="tenant-card__body">
             <div class="tenant-card__name">Cullen Jewellery</div>
-            <div class="tenant-card__suite">Suite 303 <span class="soon-tag">Opening Soon</span></div>
-            <span class="tenant-card__nolink">Coming soon</span>
+            <div class="tenant-card__suite">Suite 303</div>
+            <a href="https://cullenjewellery.com/coming-soon/san-diego" target="_blank" rel="noopener" class="tenant-card__link" aria-label="Visit Cullen Jewellery website (opens in new tab)">
+              Visit Website
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true" focusable="false"><path d="M1 5.5h9M6 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
           </div>
         </div>
 
         <!-- BlushTan -->
-        <div class="tenant-card" data-cat="play" onclick="openTenant(event, this)" data-name="BlushTan" data-suite="Suite 305" data-cat-label="Beauty" data-desc="San Diego's premier spray tanning studio offering custom airbrush tans using premium, skin-loving formulas. BlushTan delivers a natural, streak-free glow tailored to your individual skin tone and lifestyle." data-images="images/Logos%20and%20TT%20Photos/blushtan%20photo%20feature%202Y4A0100%20(1).jpg|images/Logos%20and%20TT%20Photos/blushtan%20048_Blush-7349%20(1).jpg" data-website="https://www.blushtan.com/lajolla">
+        <div class="tenant-card" data-cat="play" onclick="openTenant(event, this)" data-name="BlushTan" data-suite="Suite 305" data-cat-label="Beauty" data-desc="San Diego's premier spray tanning studio offering custom airbrush tans using premium, skin-loving formulas. BlushTan delivers a natural, streak-free glow tailored to your individual skin tone and lifestyle." data-images="images/Logos%20and%20TT%20Photos/blushtan%20photo%20feature%202Y4A0100%20(1).jpg|images/Logos%20and%20TT%20Photos/blushtan%20048_Blush-7349%20(1).jpg" data-website="https://www.blushtan.com/lajolla" data-address="7863 Girard Avenue, Suite 305, La Jolla, CA 92037" data-phone="858-412-4029" data-hours="By Appointment" data-instagram="http://instagram.com/blushtan" data-facebook="http://facebook.com/blushtan">
           <div class="tenant-card__img">
             <img src="images/Logos%20and%20TT%20Photos/blushtan%20photo%20feature%202Y4A0100%20(1).jpg" alt="BlushTan" />
             <span class="tenant-card__cat">Beauty</span>
@@ -956,9 +991,9 @@
         </div>
 
         <!-- Lucien -->
-        <div class="tenant-card" data-cat="dine" onclick="openTenant(event, this)" data-name="Lucien" data-suite="Suite 307" data-cat-label="Dine" data-desc="An elevated dining destination at La Plaza, Lucien offers a sophisticated menu inspired by French brasserie traditions with a California sensibility — ideal for weekend brunch, intimate dinners, and celebrations." data-images="https://cdn.b12.io/client_media/Rfc3NbPx/b65a3750-d2ae-11ee-a6de-0242ac110002-png-hero_image.png" data-website="https://luciensd.com/">
+        <div class="tenant-card" data-cat="dine" onclick="openTenant(event, this)" data-name="Lucien" data-suite="Suite 307" data-cat-label="Dine" data-desc="An elevated dining destination at La Plaza, Lucien offers a sophisticated menu inspired by French brasserie traditions with a California sensibility — ideal for weekend brunch, intimate dinners, and celebrations." data-images="images/lucien.jpg" data-website="https://luciensd.com/" data-address="7863 Girard Avenue, Suite 307, La Jolla, CA 92037" data-phone="619-786-3082" data-hours="Tue–Sat: 5pm–10pm · Sun &amp; Mon: Closed" data-instagram="https://www.instagram.com/lucienlajolla/" data-facebook="https://www.facebook.com/luciensd">
           <div class="tenant-card__img">
-            <img src="https://cdn.b12.io/client_media/Rfc3NbPx/b65a3750-d2ae-11ee-a6de-0242ac110002-png-hero_image.png" alt="Lucien" />
+            <img src="images/lucien.jpg" alt="Lucien" />
             <span class="tenant-card__cat">Dine</span>
           </div>
           <div class="tenant-card__body">
@@ -1021,7 +1056,7 @@
         </div>
 
         <div class="dining-card">
-          <img src="https://cdn.b12.io/client_media/Rfc3NbPx/b65a3750-d2ae-11ee-a6de-0242ac110002-png-hero_image.png" alt="Lucien" />
+          <img src="images/lucien.jpg" alt="Lucien" />
           <div class="dining-card__overlay"></div>
           <div class="dining-card__body">
             <div class="dining-card__name">Lucien</div>
@@ -1092,8 +1127,11 @@
         <span class="tm-cat-badge" id="tmCat"></span>
         <h2 class="tm-name" id="tmName"></h2>
         <span class="tm-suite" id="tmSuite"></span>
+        <div class="tm-address" id="tmAddress"></div>
+        <div class="tm-meta" id="tmMeta"></div>
         <p class="tm-desc" id="tmDesc"></p>
         <div id="tmActions"></div>
+        <div class="tm-social" id="tmSocial"></div>
       </div>
     </div>
   </div>
@@ -1188,6 +1226,34 @@
       document.getElementById('tmSuite').textContent = card.dataset.suite || '';
       document.getElementById('tmCat').textContent   = card.dataset.catLabel || '';
       document.getElementById('tmDesc').textContent  = card.dataset.desc || '';
+
+      // Address
+      const addrEl = document.getElementById('tmAddress');
+      addrEl.textContent = card.dataset.address || '';
+
+      // Meta (phone + hours)
+      const metaEl = document.getElementById('tmMeta');
+      metaEl.innerHTML = '';
+      const phone = card.dataset.phone || '';
+      const hours = card.dataset.hours || '';
+      if (phone) {
+        metaEl.innerHTML += `<div class="tm-meta-row"><svg class="tm-meta-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 2.5A1.5 1.5 0 013.5 1h1a1.5 1.5 0 011.415 1L6.5 4a1.5 1.5 0 01-.44 1.06l-.47.47a7.5 7.5 0 004.88 4.88l.47-.47A1.5 1.5 0 0112 9.5l1.997.585A1.5 1.5 0 0115 11.5v1A1.5 1.5 0 0113.5 14C7.149 14 2 8.851 2 2.5z" stroke="currentColor" stroke-width="1.2"/></svg>${phone}</div>`;
+      }
+      if (hours) {
+        metaEl.innerHTML += `<div class="tm-meta-row"><svg class="tm-meta-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.2"/><path d="M8 4.5V8l2.5 2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>${hours}</div>`;
+      }
+
+      // Social links
+      const socialEl = document.getElementById('tmSocial');
+      socialEl.innerHTML = '';
+      const ig = card.dataset.instagram || '';
+      const fb = card.dataset.facebook || '';
+      if (ig) {
+        socialEl.innerHTML += `<a href="${ig}" target="_blank" rel="noopener" class="tm-social-link" aria-label="Instagram (opens in new tab)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>Instagram</a>`;
+      }
+      if (fb) {
+        socialEl.innerHTML += `<a href="${fb}" target="_blank" rel="noopener" class="tm-social-link" aria-label="Facebook (opens in new tab)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>Facebook</a>`;
+      }
 
       const website = card.dataset.website || '';
       const tenantNameRaw = card.dataset.name || '';

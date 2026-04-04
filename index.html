@@ -1186,6 +1186,54 @@
     .tm-website:hover { background: var(--gold); }
     .tm-website svg { transition: transform 0.25s; }
     .tm-website:hover svg { transform: translateX(3px); }
+
+    .tm-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .tm-meta-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(26,20,16,0.70);
+      line-height: 1.5;
+    }
+    .tm-meta-icon {
+      flex-shrink: 0;
+      width: 16px;
+      margin-top: 2px;
+      opacity: 0.55;
+    }
+    .tm-address {
+      font-size: 12px;
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      color: rgba(26,20,16,0.55);
+      margin-bottom: 16px;
+    }
+    .tm-social {
+      display: flex;
+      gap: 14px;
+      margin-top: 16px;
+    }
+    .tm-social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: rgba(26,20,16,0.60);
+      transition: color 0.22s;
+    }
+    .tm-social-link:hover { color: var(--gold); }
+
     @media (max-width: 700px) {
       .tm-overlay { padding: 0; align-items: flex-end; }
       .tm-dialog { flex-direction: column; height: 92svh; max-width: 100%; }
@@ -1434,9 +1482,9 @@
           </a>
           <div class="tenant-list">
             <div class="tr"><span class="tr__name">Thread + Seed</span><span class="tr__tag">Boutique · Suite 101</span></div>
-            <div class="tr"><span class="tr__name">Bouluci Boutique</span><span class="tr__tag">Fashion · Suite 106</span></div>
+            <div class="tr"><span class="tr__name">ONE|10 SALON</span><span class="tr__tag">Salon · Suite 110</span></div>
             <div class="tr"><span class="tr__name">Teuscher Chocolates</span><span class="tr__tag">Artisan · Suite 204</span></div>
-            <div class="tr"><span class="tr__name">Brilliant Earth</span><span class="tr__tag">Fine Jewellery</span></div>
+            <div class="tr"><span class="tr__name">Cullen Jewellery</span><span class="tr__tag">Fine Jewellery · Suite 303</span></div>
             <div class="tr"><span class="tr__name">Compass</span><span class="tr__tag">Real Estate · Suites 208 &amp; 210</span></div>
           </div>
         </div>
@@ -1449,7 +1497,12 @@
             data-cat-label="Shop"
             data-desc="A curated boutique offering thoughtfully crafted clothing and accessories rooted in sustainable style. Thread + Seed brings together artisan-made pieces and conscious fashion for the modern La Jolla lifestyle."
             data-images="images/Logos%20and%20TT%20Photos/thread%20and%20seed%20IMG_2230.jpeg"
-            data-website="">
+            data-website=""
+            data-address="7863 Girard Avenue, Suite 101, La Jolla, CA 92037"
+            data-phone="619-538-0623"
+            data-hours="10am – 8pm Daily"
+            data-instagram="https://www.instagram.com/threadandseed"
+            data-facebook="https://www.facebook.com/threadandseed/">
             <img src="images/Logos%20and%20TT%20Photos/thread%20and%20seed%20IMG_2230.jpeg" alt="Thread + Seed boutique interior, Suite 101" />
             <div class="shop-tile__overlay">
               <div class="shop-tile__name">Thread + Seed</div>
@@ -1458,16 +1511,20 @@
           </div>
           <div class="shop-tile" style="cursor:pointer;"
             onclick="openTenant(event,this)"
-            data-name="Bouluci Boutique"
-            data-suite="Suite 106"
-            data-cat-label="Shop"
-            data-desc="A luxury women's boutique offering an exquisite selection of designer clothing, accessories, and fine jewelry. Bouluci curates a distinctive collection for the discerning La Jolla shopper."
-            data-images="https://cdn.b12.io/client_media/Rfc3NbPx/77b6927a-5d9f-11ee-b9ef-0242ac110002-png-hero_image.png"
-            data-website="https://bouluciboutique.com/">
-            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80" alt="Bouluci Boutique fashion, Suite 106" />
+            data-name="ONE|10 SALON"
+            data-suite="Suite 110"
+            data-cat-label="Salon"
+            data-desc="A premier full-service salon offering cutting-edge hair styling, color, and treatments. ONE|10 combines artistry with personalized care to deliver exceptional results in an elevated, welcoming space."
+            data-images="https://cdn.b12.io/client_media/Rfc3NbPx/5acac3d0-bd69-11eb-bc3a-0242ac110002-jpg-hero_image.jpeg"
+            data-website="https://www.one10salon.com/"
+            data-address="7863 Girard Avenue, Suite 110, La Jolla, CA 92037"
+            data-phone="By Appointment"
+            data-hours="By Appointment"
+            data-instagram="https://www.instagram.com/one10salon/">
+            <img src="https://cdn.b12.io/client_media/Rfc3NbPx/5acac3d0-bd69-11eb-bc3a-0242ac110002-jpg-hero_image.jpeg" alt="ONE|10 Salon interior, Suite 110" />
             <div class="shop-tile__overlay">
-              <div class="shop-tile__name">Bouluci Boutique</div>
-              <div class="shop-tile__suite">Suite 106</div>
+              <div class="shop-tile__name">ONE|10 SALON</div>
+              <div class="shop-tile__suite">Suite 110</div>
             </div>
           </div>
           <div class="shop-tile" style="cursor:pointer;"
@@ -1477,7 +1534,11 @@
             data-cat-label="Shop · Dine"
             data-desc="A legendary Swiss chocolatier crafting world-renowned confections using the finest ingredients imported directly from Switzerland. Experience handmade champagne truffles and seasonal creations at La Plaza."
             data-images="https://cdn.b12.io/client_media/Rfc3NbPx/a40e9128-bd66-11eb-9188-0242ac110003-jpg-regular_image.jpeg"
-            data-website="https://www.teuschersandiego.com/">
+            data-website="https://www.teuschersandiego.com/"
+            data-address="7863 Girard Avenue, Suite 204, La Jolla, CA 92037"
+            data-phone="858-230-6337"
+            data-hours="Mon–Fri: 12pm–6pm · Sat: 11am–6pm · Sun: 12pm–5:30pm"
+            data-instagram="https://www.instagram.com/teuschersandiego">
             <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80" alt="Teuscher Chocolates artisan confections, Suite 204" />
             <div class="shop-tile__overlay">
               <div class="shop-tile__name">Teuscher Chocolates</div>
@@ -1486,16 +1547,21 @@
           </div>
           <div class="shop-tile" style="cursor:pointer;"
             onclick="openTenant(event,this)"
-            data-name="Brilliant Earth"
-            data-suite="Suite 205"
+            data-name="Cullen Jewellery"
+            data-suite="Suite 303"
             data-cat-label="Fine Jewellery"
-            data-desc="A leading fine jewelry brand committed to ethically sourced gemstones and sustainable practices. Brilliant Earth offers stunning engagement rings, wedding bands, and fashion jewelry crafted to the highest standards."
-            data-images="images/brilliantearth.webp"
-            data-website="https://www.brilliantearth.com/">
-            <img src="images/brilliantearth.webp" alt="Brilliant Earth fine jewellery display" />
+            data-desc="An internationally celebrated collection of fine jewelry and engagement rings at La Plaza La Jolla. Cullen Jewellery is known for timeless designs and impeccable craftsmanship."
+            data-images="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=900&q=80"
+            data-website="https://cullenjewellery.com/coming-soon/san-diego"
+            data-address="7863 Girard Avenue, Suite 303, La Jolla, CA 92037"
+            data-phone="Coming Soon"
+            data-hours="Coming Soon"
+            data-instagram="https://www.instagram.com/cullenjewellery/"
+            data-facebook="https://www.facebook.com/cullenjewellery">
+            <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=80" alt="Cullen Jewellery fine jewelry display, Suite 303" />
             <div class="shop-tile__overlay">
-              <div class="shop-tile__name">Brilliant Earth</div>
-              <div class="shop-tile__suite">Fine Jewellery</div>
+              <div class="shop-tile__name">Cullen Jewellery</div>
+              <div class="shop-tile__suite">Suite 303</div>
             </div>
           </div>
         </div>
@@ -1708,8 +1774,11 @@
         <span class="tm-cat-badge" id="tmCat"></span>
         <h2 class="tm-name" id="tmName"></h2>
         <span class="tm-suite" id="tmSuite"></span>
+        <div class="tm-address" id="tmAddress"></div>
+        <div class="tm-meta" id="tmMeta"></div>
         <p class="tm-desc" id="tmDesc"></p>
         <div id="tmActions"></div>
+        <div class="tm-social" id="tmSocial"></div>
       </div>
     </div>
   </div>
@@ -1815,6 +1884,35 @@
       document.getElementById('tmSuite').textContent = card.dataset.suite || '';
       document.getElementById('tmCat').textContent   = card.dataset.catLabel || '';
       document.getElementById('tmDesc').textContent  = card.dataset.desc || '';
+
+      // Address
+      const addrEl = document.getElementById('tmAddress');
+      addrEl.textContent = card.dataset.address || '';
+
+      // Meta (phone + hours)
+      const metaEl = document.getElementById('tmMeta');
+      metaEl.innerHTML = '';
+      const phone = card.dataset.phone || '';
+      const hours = card.dataset.hours || '';
+      if (phone) {
+        metaEl.innerHTML += `<div class="tm-meta-row"><svg class="tm-meta-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 2.5A1.5 1.5 0 013.5 1h1a1.5 1.5 0 011.415 1L6.5 4a1.5 1.5 0 01-.44 1.06l-.47.47a7.5 7.5 0 004.88 4.88l.47-.47A1.5 1.5 0 0112 9.5l1.997.585A1.5 1.5 0 0115 11.5v1A1.5 1.5 0 0113.5 14C7.149 14 2 8.851 2 2.5z" stroke="currentColor" stroke-width="1.2"/></svg>${phone}</div>`;
+      }
+      if (hours) {
+        metaEl.innerHTML += `<div class="tm-meta-row"><svg class="tm-meta-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.2"/><path d="M8 4.5V8l2.5 2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>${hours}</div>`;
+      }
+
+      // Social links
+      const socialEl = document.getElementById('tmSocial');
+      socialEl.innerHTML = '';
+      const ig = card.dataset.instagram || '';
+      const fb = card.dataset.facebook || '';
+      if (ig) {
+        socialEl.innerHTML += `<a href="${ig}" target="_blank" rel="noopener" class="tm-social-link" aria-label="Instagram (opens in new tab)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>Instagram</a>`;
+      }
+      if (fb) {
+        socialEl.innerHTML += `<a href="${fb}" target="_blank" rel="noopener" class="tm-social-link" aria-label="Facebook (opens in new tab)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>Facebook</a>`;
+      }
+
       const website = card.dataset.website || '';
       const tenantName = card.dataset.name || '';
       document.getElementById('tmActions').innerHTML = website
